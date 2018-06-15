@@ -1,0 +1,15 @@
+.new_ticket{
+  label{
+   font-size: 13px;
+  }
+}
+.col-margin {
+  margin-top: 8px;
+}
+.button-margin {
+  margin-top: 16px;
+  width: 100%;
+  &:active, &:focus {
+    text-decoration: none;
+  }
+}
