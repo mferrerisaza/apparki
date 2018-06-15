@@ -1,6 +1,6 @@
 <div class="navbar-wagon">
   <!-- Logo -->
-  <%= link_to root_path, class: "navbar-wagon-brand" do %>
+  <%= link_to current_user.blank? ? unauthenticated_root_path : authenticated_root_path, class: "navbar-wagon-brand" do %>
     <%= image_tag "logo.png", height: 50 %>
   <% end %>
 
