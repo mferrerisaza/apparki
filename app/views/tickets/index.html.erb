@@ -27,9 +27,11 @@
 
 <h5 class="index-title">Parqueaderos pagados</h5>
 
+<% today = Time.now.strftime("%Y%m%d") %>
+
 <div class="card-container">
   <div class="row">
-    <% (@tickets.select {|t| t.status == "pagado"}).each do |ticket|  %>
+    <% (@tickets.select {|t| t.status == "pagado" && t.entry.strftime("%Y%m%d") == today}).each do |ticket|  %>
       <div class="col-xs-12 no-padding">
         <div class="card">
           <div class="card-car-icon">
