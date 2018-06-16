@@ -9,5 +9,7 @@ Rails.application.routes.draw do
     end
   end
   root to: 'pages#home'
+  resources :vehicles, only: [:new, :create, :index, :show]
+  resources :tickets, except: [:delete]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
