@@ -21,6 +21,7 @@
 .card-car-central {
   flex: 0 0 60%;
   display:block;
+  color: #333;
 }
 
 .card-car-right{
@@ -45,4 +46,9 @@
 .card-car-central-sec {
   font-size: 10px;
   font-weight: 600;
+
+}
+
+.card-link {
+  text-decoration: none;
 }

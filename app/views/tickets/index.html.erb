@@ -3,24 +3,26 @@
 <div class="card-container">
   <div class="row">
     <% (@tickets.select {|t| t.status == "pendiente"}).each do |ticket|  %>
-      <div class="col-xs-12 no-padding">
-        <div class="card">
-          <div class="card-car-icon">
-            <i class="fas fa-car fa-2x"></i>
-          </div>
-          <div class="card-car-central">
-            <div class="card-car-central-main">
-              <%= ticket.vehicle.plate.upcase %>
+    <%= link_to ticket_path(ticket.id), class: "card-link" do %>
+        <div class="col-xs-12 no-padding">
+          <div class="card">
+            <div class="card-car-icon">
+              <i class="fas fa-car fa-2x"></i>
             </div>
-            <div class="card-car-central-sec">
-              <%= parking_time(ticket.entry) %>
+            <div class="card-car-central">
+              <div class="card-car-central-main">
+                <%= ticket.vehicle.plate.upcase %>
+              </div>
+              <div class="card-car-central-sec">
+                <%= parking_time(ticket.entry) %>
+              </div>
             </div>
-          </div>
-          <div class="card-car-right">
-            <i class="fas fa-ellipsis-v"></i>
+            <div class="card-car-right">
+              <i class="fas fa-ellipsis-v"></i>
+            </div>
           </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 </div>
