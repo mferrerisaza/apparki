@@ -8,6 +8,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  i{
+    font-size: 40px;
+    color: white;
+  }
 }
 
 /* Logo */
@@ -40,6 +44,10 @@
     color: white;
     font-size: 20px;
     font-weight: bold;
+    padding-bottom: 8px;
+  }
+  a:active, a:focus {
+    text-decoration: none;
   }
 }
 

@@ -1,0 +1,31 @@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <%= form_with url: tickets_path, class: "search-plate-form", method: :get, local: true do |f|%>
+        <h4 class="modal-title" id="myModalLabel">Buscar por placa</h4>
+        <div class="mdc-text-field ticket-plate">
+          <input
+            type="text"
+            id="navbar-text-field"
+            name="plate"
+            class="mdc-text-field__input"
+            maxlength="6"
+            value = <%= params[:plate] unless params[:plate].blank? %>>
+          <label class="mdc-floating-label" for="my-text-field">Placa del vehículo</label>
+          <div class="mdc-line-ripple"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="col-xs-6">
+          <button type="button" class="mdc-button button-margin" data-dismiss="modal">Close</button>
+        </div>
+        <div class="col-xs-6">
+          <%= f.submit "Buscar", class: "mdc-button mdc-button--raised button-margin" %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

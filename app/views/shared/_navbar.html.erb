@@ -25,12 +25,15 @@
       </div>
   </div>
   <div class="navbar-wagon-item">
-    <h4>Apparki</h4>
+    <%= link_to current_user.blank? ? unauthenticated_root_path : authenticated_root_path, class: "navbar-wagon-brand" do %>
+      <h4>Apparki</h4>
+    <% end %>
   </div>
 
   <div class="navbar-wagon-item">
-    <%= link_to current_user.blank? ? unauthenticated_root_path : authenticated_root_path, class: "navbar-wagon-brand" do %>
-      <%= image_tag "logo.png", height: 50 %>
-    <% end %>
+    <i class="material-icons" data-toggle="modal" data-target="#myModal">
+      search
+    </i>
   </div>
 </div>
+<%= render 'shared/search-plate-modal' %>

@@ -3,7 +3,8 @@
 .ticket-plate{
   width: 50%;
   will-change: auto;
-  #my-text-field:valid { text-transform: uppercase; }
+  input:valid { text-transform: uppercase; }
+
 }
 .invalid-vehicle-plate{
   .mdc-text-field__input{
