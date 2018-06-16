@@ -1,2 +1,53 @@
-<h1>Tickets#index</h1>
-<p>Find me in app/views/tickets/index.html.erb</p>
+<h5 class="index-title">Vehículos parqueados</h5>
+
+<div class="card-container">
+  <div class="row">
+    <% (@tickets.select {|t| t.status == "pendiente"}).each do |ticket|  %>
+      <div class="col-xs-12 no-padding">
+        <div class="card">
+          <div class="card-car-icon">
+            <i class="fas fa-car fa-2x"></i>
+          </div>
+          <div class="card-car-central">
+            <div class="card-car-central-main">
+              <%= ticket.vehicle.plate.upcase %>
+            </div>
+            <div class="card-car-central-sec">
+              <%= parking_time(ticket.entry) %>
+            </div>
+          </div>
+          <div class="card-car-right">
+            <i class="fas fa-ellipsis-v"></i>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<h5 class="index-title">Parqueaderos pagados</h5>
+<div class="card-container">
+  <div class="row">
+    <% (@tickets.select {|t| t.status == "pagado"}).each do |ticket|  %>
+      <div class="col-xs-12 no-padding">
+        <div class="card">
+          <div class="card-car-icon">
+            <i class="fas fa-car fa-2x"></i>
+          </div>
+          <div class="card-car-central">
+            <div class="card-car-central-main">
+              <%= ticket.vehicle.plate.upcase %>
+            </div>
+            <div class="card-car-central-sec">
+              <%= paid_time(ticket.entry, ticket.exit) %>
+            </div>
+          </div>
+          <div class="card-car-right">
+            <i class="fas fa-dollar-sign fa-sm"></i>
+            <%= "#{humanized_money(money_paid(ticket.entry, ticket.exit, ticket.parking_zone.price_cents))}" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
