@@ -54,7 +54,7 @@
             </div>
             <div class="card-car-right">
               <i class="fas fa-dollar-sign fa-sm"></i>
-              <%= "#{humanized_money(money_paid(ticket.entry, ticket.exit, ticket.parking_zone.price_cents))}" %>
+              <%= humanized_money(money_paid(ticket.entry, ticket.exit, ticket.parking_zone.price_cents)) %>
             </div>
           </div>
         </div>
