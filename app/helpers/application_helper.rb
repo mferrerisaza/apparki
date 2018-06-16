@@ -5,7 +5,7 @@ module ApplicationHelper
     minutos_sobrantes = min_sobr(horas)
     return "Registrado hace #{minutos} minuto" if minutos == 1
     return "Registrado hace #{minutos} minutos" if minutos < 60
-    return "Registrado hace #{horas.floor} hora y #{minutos_sobrantes.ceil} minutos" if horas == 1
+    return "Registrado hace #{horas.floor} hora y #{minutos_sobrantes.ceil} minutos" if horas.floor == 1
     return "Registrado hace #{horas.floor} horas y #{minutos_sobrantes.ceil} minutos"
   end
 
