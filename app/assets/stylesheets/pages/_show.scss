@@ -12,11 +12,13 @@
 
 .show-row {
   margin: 0px;
+  padding: 12px;
 }
 
 .show-icon {
   padding-left: 2%;
   flex: 0 0 10%;
+  display: flex;
 }
 
 .show-row-center {
@@ -32,5 +34,22 @@
   padding-right: 2%;
   flex: 0 0 50%;
   text-align: right;
+}
+
+.show-bottom-menu {
+  background-color: $brand-primary;
+  position: absolute;
+  bottom: -2px;
+  width: 100%;
+  height: 56px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.bottom-menu-element{
+  color: white;
+  display: block;
+  text-align: center;
 }
 
