@@ -14,14 +14,15 @@
 
 .card-car-icon {
   color: $brand-primary;
-  flex: 0 0 20%;
+  flex: 0 0 10%;
   text-align: center;
 }
 
 .card-car-central {
-  flex: 0 0 60%;
+  flex: 0 0 70%;
   display:block;
   color: #333;
+  padding-left: 4%;
 }
 
 .card-car-right{
@@ -50,4 +51,8 @@
 
 .card-link {
   text-decoration: none;
+}
+
+.car-size-big {
+  font-size: 32px;
 }
