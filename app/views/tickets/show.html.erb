@@ -1,0 +1,63 @@
+<div class="show-image">
+ Imagen
+</div>
+
+<h5 class="show-title text-center gray-background">Resumen de la factura</h5>
+<div class="card-container">
+  <div class="row">
+    <div class="col-xs-12 no-padding">
+      <div class="card show-row">
+        <div class="show-icon">
+          <i class="fas fa-car fa-2x"></i>
+        </div>
+        <div class="show-row-center">
+          Placa del vehículo:
+        </div>
+        <div class="show-row-right">
+          <%= @ticket.vehicle.plate %>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 no-padding">
+      <div class="card show-row">
+        <div class="show-icon">
+          <i class="fas fa-car fa-2x"></i>
+        </div>
+        <div class="show-row-center">
+          Ingreso:
+        </div>
+        <div class="show-row-right">
+          <%= @ticket.entry %>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 no-padding">
+      <div class="card show-row">
+        <div class="show-icon">
+          <i class="fas fa-car fa-2x"></i>
+        </div>
+        <div class="show-row-center">
+          Salida:
+        </div>
+        <div class="show-row-right">
+          <% if @ticket.entry %>
+            <%= @ticket.exit %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 no-padding">
+      <div class="card show-row">
+        <div class="show-icon">
+          <i class="fas fa-car fa-2x"></i>
+        </div>
+        <div class="show-row-center">
+          Horas/Fracciones:
+        </div>
+        <div class="show-row-right">
+          1 hora y 10 minutos
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
