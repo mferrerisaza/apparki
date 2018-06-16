@@ -95,11 +95,11 @@ v4.save!
 
 p "Creando Tickets"
 
-month = Time.now.month
-day = Time.now.day
-hour = Time.now.hour
-min = Time.now.min
-sec = Time.now.min
+month = Time.zone.now.month
+day = Time.zone.now.day
+hour = Time.zone.now.hour
+min = Time.zone.now.min
+sec = Time.zone.now.min
 
 t1 = Ticket.new(
   entry: Time.new(2018,month,day,hour-2,min,sec),
