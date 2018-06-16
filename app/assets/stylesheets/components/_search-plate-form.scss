@@ -1,0 +1,12 @@
+.search-plate-form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  label, input {
+    font-size: 16px;
+  }
+  .ticket-plate{
+    width: 70%
+  }
+}

@@ -15,5 +15,4 @@ class TicketsControllerTest < ActionDispatch::IntegrationTest
     get tickets_edit_url
     assert_response :success
   end
-
 end

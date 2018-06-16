@@ -1,0 +1,23 @@
+@import "@material/textfield/mdc-text-field";
+
+.ticket-plate{
+  width: 50%;
+  will-change: auto;
+  input:valid { text-transform: uppercase; }
+
+}
+.invalid-vehicle-plate{
+  .mdc-text-field__input{
+    border-bottom-color: red !important;
+  }
+  .mdc-select__native-control {
+    border-bottom-color: red !important;
+  }
+}
+.validation-error {
+  font-family: Roboto, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: red;
+  letter-spacing: 0.009375em;
+}

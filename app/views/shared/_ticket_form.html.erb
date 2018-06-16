@@ -1,0 +1,58 @@
+<%= simple_form_for(@ticket) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :entry, as: :hidden, input_html: { value: Time.zone.now }%>
+  <div class="col-xs-12 col-margin">
+    <div class="mdc-text-field ticket-plate <%= "invalid-vehicle-plate" unless @ticket.errors.messages[:vehicle].empty? %>">
+      <input
+        type="text"
+        id="my-text-field"
+        name="vehicle[plate]"
+        class="mdc-text-field__input"
+        maxlength="6"
+        value = <%= @ticket.vehicle.plate unless @ticket.vehicle.blank? %>>
+      <label class="mdc-floating-label" for="my-text-field">Placa del vehículo</label>
+      <div class="mdc-line-ripple"></div>
+    </div>
+    <% @ticket.errors.messages[:vehicle].each do |message|%>
+      <div class="validation-error">Vehicle: <%= message %></div>
+    <% end %>
+  </div>
+  <div class="col-xs-12 col-margin">
+    <div class="mdc-select ticket-select <%= "invalid-vehicle-plate" unless @ticket.errors.messages[:parking_zone].empty? %>">
+      <select class="mdc-select__native-control" name="ticket[parking_zone_id]" id="ticket_parking_zone_id">
+        <option value="" disabled <%= "selected" if @ticket.parking_zone_id.blank?%>></option>
+        <% @parking_zones.each do |zone| %>
+          <option value=<%= zone.id %> <%= "selected" if @ticket.parking_zone_id==zone.id%>> <%= zone.name %></option>
+        <% end %>
+      </select>
+      <label class="mdc-floating-label">Seleccione la zona</label>
+      <div class="mdc-line-ripple"></div>
+    </div>
+    <% @ticket.errors.messages[:parking_zone].each do |message|%>
+      <div class="validation-error">Parking zone: <%= message %></div>
+    <% end %>
+  </div>
+  <div class="col-xs-12 col-margin">
+    <label class="image-preview-label">Foto del vehículo- <small><i>opcional</i></small></label>
+  </div>
+  <div class="col-xs-12 col-margin">
+    <div class="image-preview-container">
+      <div class="image-preview" style="cursor: pointer; background-image: url('#');" id="img_prev">
+        <label class="file optional" for="ticket_picture">
+          <i class="material-icons">
+            photo_camera
+          </i>
+        </label>
+        <input type="file" name="ticket[picture]" id="ticket_picture">
+      </div>
+      <%= f.input :picture_cache, as: :hidden %>
+    </div>
+  </div>
+  <%= f.input :status, as: :hidden, input_html: { value: "pendiente" }%>
+  <div class="col-xs-6 col-margin">
+    <%= link_to "CANCELAR", tickets_path,  class: "mdc-button button-margin" %>
+  </div>
+  <div class="col-xs-6 col-margin">
+    <%= f.submit "Imprimir",  class: "mdc-button mdc-button--raised button-margin" %>
+  </div>
+<% end %>

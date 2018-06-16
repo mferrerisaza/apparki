@@ -34,6 +34,7 @@ z1 = ParkingZone.new(
   name: "Zona 1",
   city: "El Retiro",
   user: u1,
+  price_cents: 3000
   )
 z1.save!
 
@@ -43,6 +44,7 @@ z2 = ParkingZone.new(
   name: "Zona 2",
   city: "El Retiro",
   user: u1,
+  price_cents: 3000
   )
 z2.save!
 
