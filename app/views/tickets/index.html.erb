@@ -26,6 +26,7 @@
 </div>
 
 <h5 class="index-title">Parqueaderos pagados</h5>
+
 <div class="card-container">
   <div class="row">
     <% (@tickets.select {|t| t.status == "pagado"}).each do |ticket|  %>
