@@ -8,7 +8,9 @@
     <div class="col-xs-12 no-padding">
       <div class="card show-row">
         <div class="show-icon">
-          <i class="fas fa-car fa-2x"></i>
+          <i class="material-icons">
+            directions_car
+          </i>
         </div>
         <div class="show-row-center">
           Placa del vehículo:
@@ -21,27 +23,46 @@
     <div class="col-xs-12 no-padding">
       <div class="card show-row">
         <div class="show-icon">
-          <i class="fas fa-car fa-2x"></i>
+          <i class="material-icons">
+            date_range
+          </i>
         </div>
         <div class="show-row-center">
-          Ingreso:
+          Fecha de ingreso:
         </div>
         <div class="show-row-right">
-          <%= @ticket.entry %>
+          <%= @ticket.entry.strftime("%x") %>
         </div>
       </div>
     </div>
     <div class="col-xs-12 no-padding">
       <div class="card show-row">
         <div class="show-icon">
-          <i class="fas fa-car fa-2x"></i>
+          <i class="material-icons">
+            radio_button_checked
+          </i>
         </div>
         <div class="show-row-center">
-          Salida:
+          Hora de ingreso:
         </div>
         <div class="show-row-right">
-          <% if @ticket.entry %>
-            <%= @ticket.exit %>
+          <%= @ticket.entry.strftime("%r") %>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 no-padding">
+      <div class="card show-row">
+        <div class="show-icon">
+          <i class="material-icons">
+            date_range
+          </i>
+        </div>
+        <div class="show-row-center">
+          Fecha de salida:
+        </div>
+        <div class="show-row-right">
+          <% if @ticket.exit %>
+            <%= (@ticket.exit).strftime("%x") %>
           <% end %>
         </div>
       </div>
@@ -49,7 +70,26 @@
     <div class="col-xs-12 no-padding">
       <div class="card show-row">
         <div class="show-icon">
-          <i class="fas fa-car fa-2x"></i>
+          <i class="material-icons">
+            radio_button_unchecked
+          </i>
+        </div>
+        <div class="show-row-center">
+          Hora de salida:
+        </div>
+        <div class="show-row-right">
+          <% if @ticket.exit %>
+            <%= (@ticket.exit).strftime("%r") %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 no-padding">
+      <div class="card show-row">
+        <div class="show-icon">
+          <i class="material-icons">
+          access_time
+          </i>
         </div>
         <div class="show-row-center">
           Horas/Fracciones:
@@ -58,6 +98,33 @@
           1 hora y 10 minutos
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="show-bottom-menu">
+  <div class="bottom-menu-element bottom-menu-left">
+    <i class="material-icons">
+      error_outline
+    </i>
+    <div class="text">
+      Reportar
+    </div>
+  </div>
+  <div class="bottom-menu-element bottom-menu-center">
+    <i class="material-icons">
+      print
+    </i>
+    <div class="text">
+      imprimir
+    </div>
+  </div>
+  <div class="bottom-menu-element bottom-menu-right">
+    <i class="material-icons">
+      attach_money
+    </i>
+    <div class="text">
+      Reportar
     </div>
   </div>
 </div>
