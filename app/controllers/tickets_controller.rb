@@ -1,7 +1,9 @@
 class TicketsController < ApplicationController
   before_action :set_parking_zones, only: [:new, :create]
   def index
-    @tickets = policy_scope(Ticket)
+    @tickets = Ticket.where(nil)
+    @tickets = @tickets.search_by_plate(params[:plate]) if params[:plate].present?
+    @tickets = policy_scope(@tickets)
   end
 
   def show
