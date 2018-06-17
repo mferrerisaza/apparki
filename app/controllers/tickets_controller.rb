@@ -1,6 +1,7 @@
 class TicketsController < ApplicationController
   before_action :set_parking_zones, only: [:new, :create]
   def index
+    @tickets = policy_scope(Ticket)
   end
 
   def show
@@ -8,6 +9,7 @@ class TicketsController < ApplicationController
 
   def new
     @ticket = Ticket.new
+    authorize @ticket
   end
 
   def create
@@ -32,6 +34,7 @@ class TicketsController < ApplicationController
   def ticket_params
     params.require(:ticket).permit(:entry, :parking_zone_id, :picture, :picture_cache, :status)
   end
+
   def vehicle_params
     params.require(:vehicle).permit(:plate)
   end
