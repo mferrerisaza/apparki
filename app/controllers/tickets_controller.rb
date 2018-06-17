@@ -18,6 +18,7 @@ class TicketsController < ApplicationController
     @vehicle = nil unless @vehicle.valid?
     @ticket = Ticket.new(ticket_params)
     @ticket.vehicle = @vehicle unless @vehicle.nil?
+    authorize @ticket
     if @ticket.save
       redirect_to tickets_path
     else
