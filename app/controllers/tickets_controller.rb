@@ -5,7 +5,9 @@ class TicketsController < ApplicationController
   def index
     @tickets = Ticket.where(nil)
     @tickets = @tickets.search_by_plate(params[:plate]) if params[:plate].present?
-    @tickets = policy_scope(@tickets)
+    @open_tickets = policy_scope(@tickets).where(status: "pendiente")
+    today = Time.now.strftime("%Y%m%d")
+    @close_tickets = policy_scope(@tickets).where(status: "pagado").select{ |t| t.entry.strftime("%Y%m%d") == today}
   end
 
   def show

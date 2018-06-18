@@ -51,6 +51,7 @@ module ApplicationHelper
       cl_image_path(ticket.picture, options)
     end
   end
+
   private
 
   def minutes_open(entry)
