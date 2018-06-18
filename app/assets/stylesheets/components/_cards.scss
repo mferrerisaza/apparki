@@ -14,27 +14,30 @@
 
 .card-car-icon {
   color: $brand-primary;
-  flex: 0 0 20%;
+  flex: 0 0 10%;
   text-align: center;
 }
 
 .card-car-central {
   flex: 0 0 55%;
   display:block;
+  color: #333;
+  padding-left: 4%;
 }
 
 .card-car-right{
   flex: 0 0 25%;
   text-align: right;
   padding-right: 8px;
+  color: #333;
 }
 
 .card-container{
   width: 96%;
   margin-right: auto;
   margin-left: auto;
-  padding-left: 8px;
-  padding-right: 8px;
+  padding-left: 2%;
+  padding-right: 2%;
 }
 
 .no-padding {
@@ -45,4 +48,12 @@
 .card-car-central-sec {
   font-size: 10px;
   font-weight: 600;
+}
+
+.card-link {
+  text-decoration: none;
+}
+
+.car-size-big {
+  font-size: 32px;
 }

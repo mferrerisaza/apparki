@@ -31,7 +31,28 @@ module ApplicationHelper
     humanized_money(money)
   end
 
+  def hours_paid(entry, exit)
+    minutos = minutes_closed(entry, exit)
+    horas = hours(minutos)
+    return "1 hora" if horas.floor < 2
+    return "#{horas.floor} horas" if horas.floor > 1
+  end
+
+  def car_picture_or_generic(picture)
+    options =
+      {
+        height: 800, width: 800,
+        crop: 'fit'
+      }
+
+    if picture.blank?
+      'tiquete_sin_foto.jpeg'
+    else
+      cl_image_path(ticket.picture, options)
+    end
+  end
   private
+
   def minutes_open(entry)
     ((Time.now - entry)/60).ceil
   end
