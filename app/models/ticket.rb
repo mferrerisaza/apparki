@@ -7,4 +7,8 @@ class Ticket < ApplicationRecord
 
   validates :entry, :status, presence: true
   validates :status, inclusion: { in: STATUS_CHOICES }
+
+  def self.search_by_plate(query)
+    joins(:vehicle).where("plate ILIKE ?", "%#{query}%")
+  end
 end

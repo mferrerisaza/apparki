@@ -3,7 +3,9 @@ class TicketsController < ApplicationController
   before_action :set_ticket, only: [:show]
 
   def index
-    @tickets = policy_scope(Ticket)
+    @tickets = Ticket.where(nil)
+    @tickets = @tickets.search_by_plate(params[:plate]) if params[:plate].present?
+    @tickets = policy_scope(@tickets)
   end
 
   def show
@@ -21,6 +23,7 @@ class TicketsController < ApplicationController
     @vehicle = nil unless @vehicle.valid?
     @ticket = Ticket.new(ticket_params)
     @ticket.vehicle = @vehicle unless @vehicle.nil?
+    authorize @ticket
     if @ticket.save
       redirect_to tickets_path
     else
