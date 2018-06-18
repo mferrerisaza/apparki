@@ -1,3 +1,7 @@
+<% if @tickets.empty? %>
+  <h5 class="index-title">No se han encontrado vehículos para tu busqueda</h5>
+<% end %>
+
 <% if @open_tickets.any? %>
   <h5 class="index-title">Vehículos parqueados</h5>
 <% end %>
