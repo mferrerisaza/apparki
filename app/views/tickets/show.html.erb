@@ -1,0 +1,154 @@
+<div
+  class="show-image"
+  style="background-image:
+    linear-gradient(rgba(255,255,255, 0),
+    rgba(0, 0, 0, 0.4)),
+    url('/tiquete_sin_foto.jpeg');"
+>
+</div>
+
+<div class="card-container">
+  <h5 class="show-title text-center gray-background">Resumen de la factura</h5>
+  <div class="row">
+    <div class="col-xs-12 no-padding">
+      <div class="card show-row">
+        <div class="show-icon">
+          <i class="material-icons">
+            directions_car
+          </i>
+        </div>
+        <div class="show-row-center">
+          Placa del vehículo:
+        </div>
+        <div class="show-row-right">
+          <%= @ticket.vehicle.plate %>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 no-padding">
+      <div class="card show-row">
+        <div class="show-icon">
+          <i class="material-icons">
+            date_range
+          </i>
+        </div>
+        <div class="show-row-center">
+          Fecha de ingreso:
+        </div>
+        <div class="show-row-right">
+          <%= @ticket.entry.strftime("%x") %>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 no-padding">
+      <div class="card show-row">
+        <div class="show-icon">
+          <i class="material-icons">
+            radio_button_checked
+          </i>
+        </div>
+        <div class="show-row-center">
+          Hora de ingreso:
+        </div>
+        <div class="show-row-right">
+          <%= @ticket.entry.strftime("%R") %>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 no-padding">
+      <div class="card show-row">
+        <div class="show-icon">
+          <i class="material-icons">
+            date_range
+          </i>
+        </div>
+        <div class="show-row-center">
+          Fecha de salida:
+        </div>
+        <div class="show-row-right">
+          <% if @ticket.exit %>
+            <%= (@ticket.exit).strftime("%x") %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 no-padding">
+      <div class="card show-row">
+        <div class="show-icon">
+          <i class="material-icons">
+            radio_button_unchecked
+          </i>
+        </div>
+        <div class="show-row-center">
+          Hora de salida:
+        </div>
+        <div class="show-row-right">
+          <% if @ticket.exit %>
+            <%= (@ticket.exit).strftime("%R") %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 no-padding">
+      <div class="card show-row">
+        <div class="show-icon">
+          <i class="material-icons">
+          access_time
+          </i>
+        </div>
+        <div class="show-row-center">
+          Horas/Fracciones:
+        </div>
+        <div class="show-row-right">
+          <% if @ticket.exit %>
+            <%= hours_paid(@ticket.entry, @ticket.exit) %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <% if @ticket.exit %>
+      <div class="col-xs-12 no-padding">
+        <div class="card show-row">
+          <div class="show-total-row">
+            TOTAL:
+          </div>
+          <div class="show-row-right">
+            <div class="show-total-price">
+              <div class="green-box">
+                <i class="fas fa-dollar-sign fa-sm"></i>
+                <%= humanize_price(money_paid(@ticket.entry, @ticket.exit, @ticket.parking_zone.price_cents)) %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="show-bottom-menu">
+  <div class="bottom-menu-element bottom-menu-left">
+    <i class="material-icons">
+      error_outline
+    </i>
+    <div class="bottom-menu-option-text">
+      Reportar
+    </div>
+  </div>
+  <div class="bottom-menu-element bottom-menu-center">
+    <i class="material-icons">
+      print
+    </i>
+    <div class="bottom-menu-option-text">
+      imprimir
+    </div>
+  </div>
+  <div class="bottom-menu-element bottom-menu-right">
+    <i class="material-icons">
+      attach_money
+    </i>
+    <div class="bottom-menu-option-text">
+      Reportar
+    </div>
+  </div>
+</div>

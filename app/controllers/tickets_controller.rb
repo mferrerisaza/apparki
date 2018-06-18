@@ -1,5 +1,7 @@
 class TicketsController < ApplicationController
   before_action :set_parking_zones, only: [:new, :create]
+  before_action :set_ticket, only: [:show]
+
   def index
     @tickets = Ticket.where(nil)
     @tickets = @tickets.search_by_plate(params[:plate]) if params[:plate].present?
@@ -7,6 +9,7 @@ class TicketsController < ApplicationController
   end
 
   def show
+    authorize @ticket
   end
 
   def new
@@ -40,5 +43,9 @@ class TicketsController < ApplicationController
 
   def vehicle_params
     params.require(:vehicle).permit(:plate)
+  end
+
+  def set_ticket
+    @ticket = Ticket.find(params[:id])
   end
 end
