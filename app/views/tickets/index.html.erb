@@ -1,65 +1,22 @@
-<h5 class="index-title">Vehículos parqueados</h5>
+<% if @open_tickets.any? %>
+  <h5 class="index-title">Vehículos parqueados</h5>
+<% end %>
 
 <div class="card-container">
   <div class="row">
-    <% (@tickets.select {|t| t.status == "pendiente"}).each do |ticket|  %>
-      <%= link_to ticket_path(ticket.id), class: "card-link" do %>
-        <div class="col-xs-12 no-padding">
-          <div class="card">
-            <div class="card-car-icon">
-              <i class="material-icons car-size-big">
-                directions_car
-              </i>
-            </div>
-            <div class="card-car-central">
-              <div class="card-car-central-main">
-                <%= ticket.vehicle.plate.upcase %>
-              </div>
-              <div class="card-car-central-sec">
-                <%= parking_time(ticket.entry) %>
-                <%#= "Registrado hace " + distance_of_time_in_words_to_now(ticket.entry, include_seconds: true) %>
-              </div>
-            </div>
-            <div class="card-car-right">
-              <i class="fas fa-ellipsis-v"></i>
-            </div>
-          </div>
-        </div>
-      <% end %>
+    <% @open_tickets.each do |ticket|  %>
+      <%= render 'shared/cards', ticket: ticket %>
     <% end %>
   </div>
 </div>
 
-<h5 class="index-title">Parqueaderos pagados</h5>
-
-<% today = Time.now.strftime("%Y%m%d") %>
-
+<% if @close_tickets.any? %>
+  <h5 class="index-title">Parqueaderos pagados</h5>
+<% end %>
 <div class="card-container">
   <div class="row">
-    <% (@tickets.select {|t| t.status == "pagado" && t.entry.strftime("%Y%m%d") == today}).each do |ticket|  %>
-      <%= link_to ticket_path(ticket.id), class: "card-link" do %>
-        <div class="col-xs-12 no-padding">
-          <div class="card">
-            <div class="card-car-icon">
-                <i class="material-icons car-size-big">
-                  directions_car
-                </i>
-            </div>
-            <div class="card-car-central">
-              <div class="card-car-central-main">
-                <%= ticket.vehicle.plate.upcase %>
-              </div>
-              <div class="card-car-central-sec">
-                <%= paid_time(ticket.entry, ticket.exit) %>
-              </div>
-            </div>
-            <div class="card-car-right">
-              <i class="fas fa-dollar-sign fa-sm"></i>
-              <%= humanized_money(money_paid(ticket.entry, ticket.exit, ticket.parking_zone.price_cents)) %>
-            </div>
-          </div>
-        </div>
-      <% end %>
+    <% @close_tickets.each do |ticket| %>
+      <%= render 'shared/cards', ticket: ticket %>
     <% end %>
   </div>
 </div>
