@@ -95,14 +95,8 @@ v4.save!
 
 p "Creando Tickets"
 
-month = Time.zone.now.month
-day = Time.zone.now.day
-hour = Time.zone.now.hour
-min = Time.zone.now.min
-sec = Time.zone.now.min
-
 t1 = Ticket.new(
-  entry: Time.new(2018,month,day,hour-2,min,sec),
+  entry: (Time.zone.now - 2.hours),
   status: "pendiente",
   vehicle: v1,
   parking_zone: z1
@@ -111,7 +105,7 @@ t1.save!
 p "Ticket 1 creado"
 
 t2 = Ticket.new(
-  entry: Time.new(2018,month,day,hour-1,min,sec),
+  entry: (Time.zone.now - 1.hours),
   status: "pendiente",
   vehicle: v2,
   parking_zone: z2
@@ -120,8 +114,8 @@ t2.save!
 p "Ticket 2 creado"
 
 t3 = Ticket.new(
-  entry: Time.new(2018,month,day,hour-2,min,sec),
-  exit: Time.new(2018,month,day,hour,min,sec ),
+  entry: (Time.zone.now - 2.hours),
+  exit: (Time.zone.now),
   status: "pagado",
   vehicle: v3,
   parking_zone: z1
@@ -130,8 +124,8 @@ t3.save!
 p "Ticket 3 creado"
 
 t4 = Ticket.new(
-  entry: Time.new(2018,month,day,hour-2,min,sec),
-  exit: Time.new(2018,month,day,hour,min,sec),
+  entry: (Time.zone.now - 2.hours),
+  exit: (Time.zone.now - 2.hours),
   status: "pagado",
   vehicle: v4,
   parking_zone: z2
