@@ -33,6 +33,20 @@ class TicketsController < ApplicationController
     end
   end
 
+  def update
+    @ticket = Ticket.find(params[:id])
+    @ticket.exit = ticket_params[:exit]
+    @ticket.update_charge
+    @ticket.status = "pagado"
+    authorize @ticket
+    if @ticket.save
+      redirect_to ticket_path(@ticket)
+    else
+      flash[:alert] = "Ha ocurrido un error, porfavor inténtalo nuevamente"
+      render 'show'
+    end
+  end
+
   private
 
   def set_parking_zones
@@ -40,7 +54,7 @@ class TicketsController < ApplicationController
   end
 
   def ticket_params
-    params.require(:ticket).permit(:entry, :parking_zone_id, :picture, :picture_cache, :status)
+    params.require(:ticket).permit(:entry, :exit, :parking_zone_id, :picture, :picture_cache, :status)
   end
 
   def vehicle_params
