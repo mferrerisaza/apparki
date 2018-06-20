@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   end
   resources :vehicles, only: [:new, :create, :index, :show]
   resources :tickets, except: [:delete]
+  get 'report', to: 'pages#report', as: :report
 end
