@@ -1,1 +1,24 @@
 @import "@material/menu/mdc-menu.css";
+
+.material-menu-container{
+  right: 10px;
+  padding: 0px 8px;
+  text-align: left;
+  .mdc-list-item {
+    font-family: $body-font;
+    font-size: 12px;
+  }
+  .menu-charge-btn {
+    cursor: pointer;
+    display: flex;
+    background-color: transparent;
+    border: none;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    div {
+      text-align: left;
+      width: 60%;
+    }
+  }
+}
