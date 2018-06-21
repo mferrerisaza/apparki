@@ -1,5 +1,5 @@
 <%= link_to ticket_path(ticket.id), class: "card-link" do %>
-  <div class="col-xs-12 no-padding">
+  <div class="col-xs-12 no-padding" >
     <div class="card">
       <div class="card-car-icon">
         <i class="material-icons car-size-big">
@@ -7,31 +7,68 @@
         </i>
       </div>
       <% unless ticket.exit? %>
-      <div class="card-car-central">
-        <div class="card-car-central-main">
-          <%= ticket.vehicle.plate.upcase %>
+        <div class="card-car-central">
+          <div class="card-car-central-main">
+            <%= ticket.vehicle.plate.upcase %>
+          </div>
+          <div class="card-car-central-sec">
+            <%= parking_time(ticket.entry) %>
+            <%#= "Registrado hace " + distance_of_time_in_words_to_now(ticket.entry, include_seconds: true) %>
+          </div>
         </div>
-        <div class="card-car-central-sec">
-          <%= parking_time(ticket.entry) %>
-          <%#= "Registrado hace " + distance_of_time_in_words_to_now(ticket.entry, include_seconds: true) %>
+        <div class="card-car-right">
+          <div class="mdc-menu material-menu-container">
+            <ul class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
+              <li class="mdc-list-item" role="menuitem" tabindex="0">
+                <button class="menu-charge-btn" style="cursor:pointer;">
+                 <i class="material-icons">
+                   error_outline
+                 </i>
+                  <div class="bottom-menu-option-text">
+                    Reportar
+                  </div>
+                </button>
+              </li>
+              <li class="mdc-list-item" role="menuitem" tabindex="0">
+                <button class="menu-charge-btn" style="cursor:pointer;">
+                  <i class="material-icons">
+                    print
+                  </i>
+                  <div class="bottom-menu-option-text">
+                    Imprimir
+                  </div>
+                </button>
+              </li>
+              <li class="mdc-list-item" role="menuitem" tabindex="0">
+                <%= simple_form_for(ticket) do |f| %>
+                  <%= f.input :exit, as: :hidden, input_html: { value: Time.zone.now }%>
+                  <button class="menu-charge-btn"type="submit" style="cursor:pointer;">
+                    <i class="material-icons">
+                      attach_money
+                    </i>
+                    <div class="bottom-menu-option-text">
+                      Generar cobro
+                    </div>
+                  </button>
+                <% end %>
+              </li>
+            </ul>
+          </div>
+          <i class="fas fa-ellipsis-v menu-button" ></i>
         </div>
-      </div>
-      <div class="card-car-right">
-        <i class="fas fa-ellipsis-v"></i>
-      </div>
       <% else %>
-      <div class="card-car-central">
-        <div class="card-car-central-main">
-          <%= ticket.vehicle.plate.upcase %>
+        <div class="card-car-central">
+          <div class="card-car-central-main">
+            <%= ticket.vehicle.plate.upcase %>
+          </div>
+          <div class="card-car-central-sec">
+            <%= paid_time(ticket.entry, ticket.exit) %>
+          </div>
         </div>
-        <div class="card-car-central-sec">
-          <%= paid_time(ticket.entry, ticket.exit) %>
+        <div class="card-car-right">
+          <i class="fas fa-dollar-sign fa-sm"></i>
+          <%= humanized_money(money_paid(ticket.entry, ticket.exit, ticket.parking_zone.price_cents)) %>
         </div>
-      </div>
-      <div class="card-car-right">
-        <i class="fas fa-dollar-sign fa-sm"></i>
-        <%= humanized_money(money_paid(ticket.entry, ticket.exit, ticket.parking_zone.price_cents)) %>
-      </div>
       <% end %>
     </div>
   </div>
