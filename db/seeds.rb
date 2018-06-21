@@ -99,7 +99,8 @@ t1 = Ticket.new(
   entry: (Time.zone.now - 2.hours),
   status: "pendiente",
   vehicle: v1,
-  parking_zone: z1
+  parking_zone: z1,
+  charge_cents: 2000,
   )
 t1.save!
 p "Ticket 1 creado"
@@ -108,7 +109,8 @@ t2 = Ticket.new(
   entry: (Time.zone.now - 1.hours),
   status: "pendiente",
   vehicle: v2,
-  parking_zone: z2
+  parking_zone: z2,
+  charge_cents: 2000,
   )
 t2.save!
 p "Ticket 2 creado"
@@ -118,7 +120,8 @@ t3 = Ticket.new(
   exit: (Time.zone.now),
   status: "pagado",
   vehicle: v3,
-  parking_zone: z1
+  parking_zone: z1,
+  charge_cents: 2000,
   )
 t3.save!
 p "Ticket 3 creado"
@@ -128,7 +131,8 @@ t4 = Ticket.new(
   exit: (Time.zone.now - 2.hours),
   status: "pagado",
   vehicle: v4,
-  parking_zone: z2
+  parking_zone: z2,
+  charge_cents: 2000,
   )
 t4.save!
 p "Ticket 4 creado"

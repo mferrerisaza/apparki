@@ -5,5 +5,6 @@ class PagesController < ApplicationController
   end
 
   def report
+    @tickets = policy_scope(Ticket)
   end
 end
