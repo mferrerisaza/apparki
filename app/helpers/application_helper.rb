@@ -41,14 +41,14 @@ module ApplicationHelper
   def car_picture_or_generic(picture)
     options =
       {
-        height: 800, width: 800,
-        crop: 'fit'
+        # aspect_ratio: "1.1",
+        # crop: "pad"
       }
 
     if picture.blank?
-      'tiquete_sin_foto.jpeg'
+      cl_image_path('Default Pics/ticketplaceholder.jpg', options)
     else
-      cl_image_path(ticket.picture, options)
+      cl_image_path(picture, options)
     end
   end
 
