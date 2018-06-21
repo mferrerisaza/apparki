@@ -160,13 +160,13 @@
   </div>
     <%= simple_form_for(@ticket) do |f| %>
       <%= f.input :exit, as: :hidden, input_html: { value: Time.zone.now }%>
-  <button class="bottom-menu-element bottom-menu-right bottom-menu-btn" type="submit" style="cursor:pointer;">
-    <i class="material-icons">
-      attach_money
-    </i>
-    <div class="bottom-menu-option-text">
-      Generar cobro
-    </div>
-  </button>
+      <button class="bottom-menu-element bottom-menu-right bottom-menu-btn" type="submit" style="cursor:pointer;">
+        <i class="material-icons">
+          attach_money
+        </i>
+        <div class="bottom-menu-option-text">
+          Generar cobro
+        </div>
+      </button>
     <% end %>
 </div>
