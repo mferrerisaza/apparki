@@ -1,8 +1,8 @@
 <div class="navbar-wagon">
   <div class="navbar-wagon-item">
 
-      <% if params[:plate].present? || action_name == "show"    %>
-        <%= link_to :back do %>
+      <% if params[:plate].present? || action_name == "show" || action_name == "new"    %>
+        <%= link_to tickets_path do %>
           <i class="material-icons navbar-wagon-icon">
             arrow_back
           </i>

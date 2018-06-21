@@ -141,7 +141,7 @@
   </div>
 </div>
 
-<div class="show-bottom-menu">
+<div class="show-bottom-menu <%= "hidden" if @ticket.status == "pagado" %> ">
   <div class="bottom-menu-element bottom-menu-left">
     <i class="material-icons">
       error_outline
