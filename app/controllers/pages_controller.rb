@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   def home
   end
 
-  def report
+  def dashboard
     @tickets = policy_scope(Ticket)
   end
 end
