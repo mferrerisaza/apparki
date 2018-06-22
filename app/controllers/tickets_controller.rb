@@ -41,6 +41,7 @@ class TicketsController < ApplicationController
     authorize @ticket
     if @ticket.save
       redirect_to ticket_path(@ticket)
+      flash[:notice] = "Cobro generado con éxito"
     else
       flash[:alert] = "Ha ocurrido un error, porfavor inténtalo nuevamente"
       render 'show'
