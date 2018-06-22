@@ -1,0 +1,3 @@
+<%= content_tag :div, "", id: "amount_per_user" %>
+<%= bar_chart Ticket.all.group(:parking_zone).count %>
+<%= bar_chart Ticket.all.group(:parking_zone).count, discrete: true %>
