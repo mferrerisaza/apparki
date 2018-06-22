@@ -24,4 +24,29 @@ class Ticket < ApplicationRecord
     hours = grace_time >= time_parked ? time_parked.floor : time_parked.ceil
     self.charge = hours * parking_zone.price
   end
+
+  def self.build_data(args = {})
+    dates_array = []
+    date_range = (Time.zone.today - 30.days..Time.zone.today)
+    date_range.each do |date|
+      beginning_of_day = date.beginning_of_day
+      end_of_day = date.end_of_day
+      zone_hash = {}
+      ParkingZone.all.each do |pz|
+        ticket_hash = {}
+        tickets = Ticket.where(parking_zone: pz).where(entry: beginning_of_day..end_of_day)
+        tickets.each do |ticket|
+          ticket_hash[ticket.id] = ticket.charge_cents
+        end
+        zone_hash[pz.name] = ticket_hash
+      end
+    dates_array[date] = zone_hash
+    end
+    dates_array.each_key do |date_key|
+      dates_array[date_key].each_key do |zone_key|
+        dates_array[date_key][zone_key].keep_if { |_k, v| v.present? }
+      end
+      dates_array[date_key].keep_if { |_k, v| v.present? }
+    end
+  end
 end
