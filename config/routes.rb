@@ -10,5 +10,6 @@ Rails.application.routes.draw do
   end
   resources :vehicles, only: [:new, :create, :index, :show]
   resources :tickets, except: [:delete]
-  get 'report', to: 'pages#report', as: :report
+  get "/report_data", to: "tickets#report_data", as: "report_data"
+  get "dashboard", to: "pages#dashboard", as: "dashboard"
 end
