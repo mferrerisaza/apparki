@@ -4,3 +4,5 @@ import "../components/textField.js";
 import "../components/select.js";
 import "../components/imagePreview.js";
 import "../components/navbar.js";
+import "../components/menu.js";
+
