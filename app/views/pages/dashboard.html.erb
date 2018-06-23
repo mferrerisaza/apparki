@@ -1,3 +1,36 @@
-<%= content_tag :div, "", id: "amount_per_user" %>
-<%= bar_chart Ticket.all.group(:parking_zone).count %>
-<%= bar_chart Ticket.all.group(:parking_zone).count, discrete: true %>
+<ul>
+  <li>Ingresos por usuario al día</li>
+  <li>Ingresos por usuario a la semana</li>
+  <li>Ingresos por usuario al mes</li>
+  <li>Ingresos por zona al día - done</li>
+  <li>Ingresos por zona a la semana - done</li>
+  <li>Ingresos por zona al mes - Done</li>
+  <li>Ingresos totales -  Done</li>
+  <li>Cuentas por cobrar</li>
+  <li>Cuentas por cobrar x placa</li>
+</ul>
+
+<h5> Ingresos totales semana actual </h5>
+<%= column_chart @week_tickets.group_by_day(:entry, format: "%v").sum(:charge_cents), xtitle: "Día", ytitle: "Ingresos", label: "Recaudo" %>
+<%= column_chart @month_tickets.group_by_week(:entry, format: "%v").sum(:charge_cents), xtitle: "Inicio de la semana", ytitle: "Ingresos" %>
+<%= line_chart ParkingZone.all.map { |pz|
+    {name: pz.name, data: Ticket.where(parking_zone: pz).group_by_day(:entry, format: "%v").sum(:charge_cents) }
+}, xtitle: "Dia", ytitle: "Ingresos" %>
+<%= column_chart ParkingZone.all.map { |pz|
+    {name: pz.name, data: @month_tickets.where(parking_zone: pz).group_by_week(:entry, format: "%v").sum(:charge_cents)}
+}, xtitle: "dia", ytitle: "Ingresos" %>
+
+<%= pie_chart Ticket.joins(:parking_zone).group(:name).sum(:charge_cents) %>
+
+<table>
+  <tr>
+    <th>Placa</th>
+    <th>Deuda pendiente</th>
+  </tr>
+  <% @reported_tickets.each do |ticket| %>
+    <tr>
+      <td><%= ticket.vehicle.plate %></td>
+      <td><%= Ticket.where(vehicle: ticket.vehicle).where(status: "reportado").sum(:charge_cents) %></td>
+    </tr>
+  <% end %>
+</table>
