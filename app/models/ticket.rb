@@ -49,4 +49,19 @@ class Ticket < ApplicationRecord
       dates_array[date_key].keep_if { |_k, v| v.present? }
     end
   end
+
+  def self.group_tickets(period)
+    date = Time.zone.today
+    if period == "week"
+      beg = date.beginning_of_week
+      endd = date.end_of_week
+    elsif period == "month"
+      beg = date.beginning_of_month
+      endd = date.end_of_month
+    elsif period == "year"
+      beg = date.beginning_of_year
+      endd = date.end_of_year
+    end
+    group_tickets = Ticket.where(entry: beg..endd)
+  end
 end
