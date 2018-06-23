@@ -136,3 +136,34 @@ t4 = Ticket.new(
   )
 t4.save!
 p "Ticket 4 creado"
+
+200.times do |time|
+  entry = rand(0..480)
+  hours = rand(0..4)
+  t = Ticket.new(
+  entry: (Time.zone.now - entry.hours),
+  exit: (Time.zone.now - entry.hours + hours),
+  status: "pagado",
+  vehicle: v4,
+  parking_zone: [z1, z2, z3].sample,
+  charge_cents: 2000 * hours,
+  )
+  t.save!
+  p "Ticket #{time} creado"
+end
+
+
+10.times do |time|
+  entry = rand(0..480)
+  hours = rand(0..4)
+  t = Ticket.new(
+  entry: (Time.zone.now - entry.hours),
+  exit: (Time.zone.now - entry.hours + hours),
+  status: "reportado",
+  vehicle: v4,
+  parking_zone: [z1, z2, z3, z1].sample,
+  charge_cents: 2000 * hours,
+  )
+  t.save!
+  p "Ticket #{time} creado"
+end
