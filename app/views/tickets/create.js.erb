@@ -1,0 +1,11 @@
+function printpage() {
+  const print = document.getElementById("linkImpresora");
+  const zoneSelect = document.getElementById("ticket_parking_zone_id");
+  const zone = zoneSelect.options[zoneSelect.selectedIndex].text;
+  const plate = document.getElementById("my-text-field").value;
+  const entry = document.getElementById("ticket_entry").value;
+  print.href = `com.fidelier.printfromweb://$intro$$intro$$biguhw$Tiquete de parqueadero$intro$$intro$->Hora ingreso: ${entry}$intro$->Placa Del Vehiculo: ${plate}$intro$->Zona: ${zone}$intro$$intro$$intro$$intro$$cut$$intro$`;
+  print.click();
+}
+
+printpage();
