@@ -1,15 +1,19 @@
 import {MDCMenu} from '@material/menu';
-
-const menuHTML = document.querySelector('.mdc-menu')
-if (menuHTML) {
-  const menu = new MDCMenu(menuHTML);
-  const menuButtons = document.querySelectorAll('.menu-button');
-
-  for (let i = 0; i < menuButtons.length; i++) {
-    menuButtons[i].addEventListener("click", (event) => {
-      event.preventDefault();
-      menu.open = !menu.open;
-    })
+const addListenerToMenus = () => {
+  const menuElements = document.querySelectorAll('.mdc-menu')
+  if (menuElements) {
+    for (let i = 0; i < menuElements.length; i++) {
+      const menuHTML = menuElements[i];
+      const menu = new MDCMenu(menuHTML);
+      const menuButton = menuHTML.parentNode.querySelector('.menu-button');
+      menuButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        menu.open = !menu.open;
+      })
+    }
   }
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  addListenerToMenus();
+})
