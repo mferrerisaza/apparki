@@ -99,7 +99,8 @@ t1 = Ticket.new(
   entry: (Time.zone.now - 2.hours),
   status: "pendiente",
   vehicle: v1,
-  parking_zone: z1
+  parking_zone: z1,
+  charge_cents: 2000,
   )
 t1.save!
 p "Ticket 1 creado"
@@ -108,7 +109,8 @@ t2 = Ticket.new(
   entry: (Time.zone.now - 1.hours),
   status: "pendiente",
   vehicle: v2,
-  parking_zone: z2
+  parking_zone: z2,
+  charge_cents: 2000,
   )
 t2.save!
 p "Ticket 2 creado"
@@ -118,7 +120,8 @@ t3 = Ticket.new(
   exit: (Time.zone.now),
   status: "pagado",
   vehicle: v3,
-  parking_zone: z1
+  parking_zone: z3,
+  charge_cents: 2000,
   )
 t3.save!
 p "Ticket 3 creado"
@@ -128,7 +131,50 @@ t4 = Ticket.new(
   exit: (Time.zone.now - 2.hours),
   status: "pagado",
   vehicle: v4,
-  parking_zone: z2
+  parking_zone: z3,
+  charge_cents: 2000,
   )
 t4.save!
 p "Ticket 4 creado"
+
+400.times do |time|
+  entry = rand(0..2160)
+  hours = rand(0..4)
+  t = Ticket.new(
+  entry: (Time.zone.now - entry.hours),
+  exit: (Time.zone.now - entry.hours + hours),
+  status: "pagado",
+  vehicle: v4,
+  parking_zone: [z1, z2, z3, z3].sample,
+  charge_cents: 2000 * hours,
+  )
+  t.save!
+  p "Ticket #{time} creado"
+end
+
+
+10.times do |time|
+  entry = rand(0..480)
+  hours = rand(0..4)
+  t = Ticket.new(
+  entry: (Time.zone.now - entry.hours),
+  exit: (Time.zone.now - entry.hours + hours),
+  status: "reportado",
+  vehicle: [v1, v2, v3, v4].sample,
+  parking_zone: [z1, z2, z3, z3].sample,
+  charge_cents: 2000 * hours,
+  )
+  t.save!
+  p "Ticket #{time} creado"
+end
+
+textra = Ticket.new(
+  entry: (Time.zone.now.end_of_day),
+  exit: (Time.zone.now.end_of_day + 2.hours),
+  status: "pagado",
+  vehicle: v4,
+  parking_zone: z2,
+  charge_cents: 2000 * 2,
+  )
+textra.save!
+p "Ticket extra creado"

@@ -48,6 +48,11 @@ class TicketsController < ApplicationController
     end
   end
 
+  def report_data
+    @data = Ticket.build_data
+    render json: @data
+  end
+
   private
 
   def set_parking_zones

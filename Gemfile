@@ -3,8 +3,10 @@ ruby '2.4.4'
 
 gem 'carrierwave', '~> 1.2'
 gem 'cloudinary'
+gem "chartkick"
 gem 'devise'
 gem 'figaro'
+gem 'groupdate'
 gem 'jbuilder', '~> 2.0'
 gem 'pg', '~> 0.21'
 gem 'puma'
