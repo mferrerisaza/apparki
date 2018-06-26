@@ -131,7 +131,7 @@
             <div class="show-total-price">
               <div class="green-box">
                 <i class="fas fa-dollar-sign fa-sm"></i>
-                <%= humanize_price(@ticket.charge_cents) %>
+                <%= humanize_price(@ticket.charge) %>
               </div>
             </div>
           </div>
@@ -151,16 +151,20 @@
     </div>
   </div>
   <div class="bottom-menu-element bottom-menu-center">
-    <i class="material-icons">
-      print
-    </i>
-    <div class="bottom-menu-option-text">
-      imprimir
-    </div>
+    <% string = "com.fidelier.printfromweb://$intro$$intro$$biguhw$TIQUETE DE PARQUEADERO$intro$$intro$->Hora ingreso: #{@ticket.entry}$intro$->Placa Del Vehiculo: #{@ticket.vehicle.plate}$intro$->Zona: #{@ticket.parking_zone.name}$intro$$intro$$intro$$intro$$cut$$intro$" %>
+    <a href="<%= string %>" >
+      <i class="material-icons">
+        print
+      </i>
+      <div class="bottom-menu-option-text">
+        imprimir
+      </div>
+    </a>
   </div>
-    <%= simple_form_for(@ticket) do |f| %>
+    <%= simple_form_for(@ticket, remote: true) do |f| %>
       <%= f.input :exit, as: :hidden, input_html: { value: Time.zone.now }%>
       <button class="bottom-menu-element bottom-menu-right bottom-menu-btn" type="submit" style="cursor:pointer;">
+        <a href="#" id="linkImpresora" class="hidden"></a>
         <i class="material-icons">
           attach_money
         </i>
