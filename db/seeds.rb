@@ -34,7 +34,7 @@ z1 = ParkingZone.new(
   name: "Zona 1",
   city: "El Retiro",
   user: u1,
-  price_cents: 3000
+  price: 3000
   )
 z1.save!
 
@@ -44,7 +44,7 @@ z2 = ParkingZone.new(
   name: "Zona 2",
   city: "El Retiro",
   user: u1,
-  price_cents: 3000
+  price: 3000
   )
 z2.save!
 
@@ -54,6 +54,7 @@ z3 = ParkingZone.new(
   name: "Zona 3",
   city: "El Retiro",
   user: u2,
+  price: 3000
   )
 z3.save!
 
@@ -100,7 +101,7 @@ t1 = Ticket.new(
   status: "pendiente",
   vehicle: v1,
   parking_zone: z1,
-  charge_cents: 2000,
+  charge: 2000,
   )
 t1.save!
 p "Ticket 1 creado"
@@ -110,7 +111,7 @@ t2 = Ticket.new(
   status: "pendiente",
   vehicle: v2,
   parking_zone: z2,
-  charge_cents: 2000,
+  charge: 2000,
   )
 t2.save!
 p "Ticket 2 creado"
@@ -121,7 +122,7 @@ t3 = Ticket.new(
   status: "pagado",
   vehicle: v3,
   parking_zone: z3,
-  charge_cents: 2000,
+  charge: 2000,
   )
 t3.save!
 p "Ticket 3 creado"
@@ -132,7 +133,7 @@ t4 = Ticket.new(
   status: "pagado",
   vehicle: v4,
   parking_zone: z3,
-  charge_cents: 2000,
+  charge: 2000,
   )
 t4.save!
 p "Ticket 4 creado"
@@ -146,7 +147,7 @@ p "Ticket 4 creado"
   status: "pagado",
   vehicle: v4,
   parking_zone: [z1, z2, z3, z3].sample,
-  charge_cents: 2000 * hours,
+  charge: 2000 * hours,
   )
   t.save!
   p "Ticket #{time} creado"
@@ -162,7 +163,7 @@ end
   status: "reportado",
   vehicle: [v1, v2, v3, v4].sample,
   parking_zone: [z1, z2, z3, z3].sample,
-  charge_cents: 2000 * hours,
+  charge: 2000 * hours,
   )
   t.save!
   p "Ticket #{time} creado"
@@ -174,7 +175,7 @@ textra = Ticket.new(
   status: "pagado",
   vehicle: v4,
   parking_zone: z2,
-  charge_cents: 2000 * 2,
+  charge: 2000 * 2,
   )
 textra.save!
 p "Ticket extra creado"
