@@ -43,7 +43,7 @@
             photo_camera
           </i>
         </label>
-        <input type="file" name="ticket[picture]" id="ticket_picture">
+        <%= f.input :picture, label: false%>
       </div>
       <%= f.input :picture_cache, as: :hidden %>
     </div>

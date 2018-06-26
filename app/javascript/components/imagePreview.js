@@ -11,7 +11,7 @@ function readURL(input) {
   }
 
 function addPictureListener(){
-  ticketPicture = document.getElementById("ticket_picture");
+  const ticketPicture = document.getElementById("ticket_picture");
   if (ticketPicture) {
     ticketPicture.addEventListener("change", (event) => {
       readURL(event.currentTarget);

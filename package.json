@@ -4,6 +4,7 @@
   "dependencies": {
     "@material/button": "^0.36.0",
     "@material/fab": "^0.36.0",
+    "@material/menu": "^0.36.1",
     "@material/select": "^0.36.0",
     "@material/textfield": "^0.36.0",
     "@material/typography": "^0.35.0",
@@ -14,7 +15,8 @@
     "highcharts": "^6.1.0",
     "jquery": "^3.3.1",
     "material-design-icons": "^3.0.1",
-    "npm": "^6.1.0"
+    "npm": "^6.1.0",
+    "sweetalert": "^2.1.0"
   },
   "devDependencies": {
     "webpack-dev-server": "2.11.2"
