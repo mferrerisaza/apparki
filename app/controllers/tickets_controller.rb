@@ -46,11 +46,17 @@ class TicketsController < ApplicationController
     @ticket.status = "pagado"
     authorize @ticket
     if @ticket.save
-      redirect_to ticket_path(@ticket)
-      flash[:notice] = "Cobro generado con éxito"
+      respond_to do |format|
+        flash[:notice] = "Cobro generado con éxito"
+        format.html { redirect_to ticket_path(@ticket) }
+        format.js
+      end
     else
       flash[:alert] = "Ha ocurrido un error, porfavor inténtalo nuevamente"
-      render 'show'
+      respond_to do |format|
+        format.html { render 'show' }
+        format.js
+      end
     end
   end
 
