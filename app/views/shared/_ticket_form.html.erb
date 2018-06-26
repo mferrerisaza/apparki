@@ -1,4 +1,4 @@
-<%= simple_form_for(@ticket) do |f| %>
+<%= simple_form_for(@ticket, remote: true) do |f| %>
   <%= f.error_notification %>
   <%= f.input :entry, as: :hidden, input_html: { value: Time.zone.now }%>
   <div class="col-xs-12 col-margin">
@@ -54,5 +54,6 @@
   </div>
   <div class="col-xs-6 col-margin">
     <%= f.submit "Imprimir",  class: "mdc-button mdc-button--raised button-margin" %>
+    <a href="#" id="linkImpresora"></a>
   </div>
 <% end %>
