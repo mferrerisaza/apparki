@@ -8,6 +8,15 @@ class Ticket < ApplicationRecord
 
   validates :entry, :status, presence: true
   validates :status, inclusion: { in: STATUS_CHOICES }
+  validate :vehicle_tickets, on: :create
+
+  def vehicle_tickets
+    if Ticket.where(status: "pendiente").where(vehicle_id: self.vehicle.id).blank?
+      true
+    else
+      errors.messages[:vehicle] << "este vehículo ya tiene un tiquete activo"
+    end
+  end
 
   def self.search_by_plate(query)
     joins(:vehicle).where("plate ILIKE ?", "%#{query}%")
