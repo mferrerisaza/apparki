@@ -1,4 +1,4 @@
-@import "@material/menu/mdc-menu.css";
+@import "@material/menu/mdc-menu";
 
 .material-menu-container{
   right: 10px;
@@ -20,5 +20,8 @@
       text-align: left;
       width: 60%;
     }
+  }
+  .link-to-btn-style{
+    padding: 0px 6px;
   }
 }
