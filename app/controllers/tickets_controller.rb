@@ -27,9 +27,15 @@ class TicketsController < ApplicationController
     @ticket.vehicle = @vehicle unless @vehicle.nil?
     authorize @ticket
     if @ticket.save
-      redirect_to tickets_path
+      respond_to do |format|
+        format.html { redirect_to tickets_path }
+        format.js
+      end
     else
-      render 'new'
+      respond_to do |format|
+        format.html { render 'new' }
+        format.js
+      end
     end
   end
 

@@ -1,21 +1,22 @@
-<%= link_to ticket_path(ticket.id), class: "card-link" do %>
   <div class="col-xs-12 no-padding" >
     <div class="card">
-      <div class="card-car-icon">
-        <i class="material-icons car-size-big">
-          directions_car
-        </i>
-      </div>
       <% unless ticket.exit? %>
-        <div class="card-car-central">
-          <div class="card-car-central-main">
-            <%= ticket.vehicle.plate.upcase %>
+        <%= link_to ticket_path(ticket), class: "card-link card-linkeable" do %>
+          <div class="card-car-icon">
+            <i class="material-icons car-size-big">
+              directions_car
+            </i>
           </div>
-          <div class="card-car-central-sec">
-            <%= parking_time(ticket.entry) %>
-            <%#= "Registrado hace " + distance_of_time_in_words_to_now(ticket.entry, include_seconds: true) %>
+          <div class="card-car-central">
+            <div class="card-car-central-main">
+              <%= ticket.vehicle.plate.upcase %>
+            </div>
+            <div class="card-car-central-sec">
+              <%= parking_time(ticket.entry) %>
+              <%#= "Registrado hace " + distance_of_time_in_words_to_now(ticket.entry, include_seconds: true) %>
+            </div>
           </div>
-        </div>
+        <% end %>
         <div class="card-car-right">
           <div class="mdc-menu material-menu-container">
             <ul class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
@@ -30,14 +31,15 @@
                 </button>
               </li>
               <li class="mdc-list-item" role="menuitem" tabindex="0">
-                <button class="menu-charge-btn" style="cursor:pointer;">
+                <% string = "com.fidelier.printfromweb://$intro$$intro$$biguhw$Tiquete de parqueadero$intro$$intro$->Hora ingreso: #{ticket.entry}$intro$->Placa Del Vehiculo: #{ticket.vehicle.plate}$intro$->Zona: #{ticket.parking_zone.name}$intro$$intro$$intro$$intro$$cut$$intro$" %>
+                <a href="<%= string %>" class="menu-charge-btn link-to-btn-style" style="cursor:pointer;">
                   <i class="material-icons">
                     print
                   </i>
                   <div class="bottom-menu-option-text">
                     Imprimir
                   </div>
-                </button>
+                </a>
               </li>
               <li class="mdc-list-item" role="menuitem" tabindex="0">
                 <%= simple_form_for(ticket) do |f| %>
@@ -57,19 +59,25 @@
           <i class="fas fa-ellipsis-v menu-button" ></i>
         </div>
       <% else %>
-        <div class="card-car-central">
-          <div class="card-car-central-main">
-            <%= ticket.vehicle.plate.upcase %>
+        <%= link_to ticket_path(ticket), class: "card-link card-linkeable" do %>
+          <div class="card-car-icon">
+            <i class="material-icons car-size-big">
+              directions_car
+            </i>
           </div>
-          <div class="card-car-central-sec">
-            <%= paid_time(ticket.entry, ticket.exit) %>
+          <div class="card-car-central">
+            <div class="card-car-central-main">
+              <%= ticket.vehicle.plate.upcase %>
+            </div>
+            <div class="card-car-central-sec">
+              <%= paid_time(ticket.entry, ticket.exit) %>
+            </div>
           </div>
-        </div>
-        <div class="card-car-right">
-          <i class="fas fa-dollar-sign fa-sm"></i>
-          <%= humanized_money(money_paid(ticket.entry, ticket.exit, ticket.parking_zone.price_cents)) %>
-        </div>
+        <% end %>
+          <div class="card-car-right">
+            <i class="fas fa-dollar-sign fa-sm"></i>
+            <%= humanized_money(money_paid(ticket.entry, ticket.exit, ticket.parking_zone.price_cents)) %>
+          </div>
       <% end %>
     </div>
   </div>
-<% end %>

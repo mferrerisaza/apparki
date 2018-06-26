@@ -1,0 +1,28 @@
+function refreshForm(innerHTML) {
+  const newTicketForm = document.getElementById('new_ticket');
+  newTicketForm.innerHTML = innerHTML;
+}
+
+function printTicket() {
+  const print = document.getElementById("linkImpresora");
+  const zoneSelect = document.getElementById("ticket_parking_zone_id");
+  const zone = zoneSelect.options[zoneSelect.selectedIndex].text;
+  const plate = document.getElementById("my-text-field").value.toUpperCase();
+  const entry = document.getElementById("ticket_entry").value;
+  print.href = `com.fidelier.printfromweb://$intro$$intro$$biguhw$Tiquete de parqueadero$intro$$intro$->Hora ingreso: ${entry}$intro$->Placa Del Vehiculo: ${plate}$intro$->Zona: ${zone}$intro$$intro$$intro$$intro$$cut$$intro$`;
+  print.click();
+}
+
+function printError() {
+  const print = document.getElementById("linkImpresora");
+  print.href = `com.fidelier.printfromweb://$intro$$intro$$biguhw$Ha habido un error, por favor intentelo nuevamente$intro$$intro$$intro$$intro$$cut$$intro$`;
+  print.click();
+}
+
+<% if @ticket.errors.any? %>
+  refreshForm('<%= j render "shared/ticket_form", ticket: @ticket %>');
+  // printError();
+<% else %>
+  printTicket();
+  window.location.href = '/tickets'
+<% end %>
