@@ -22,6 +22,6 @@ module Apparki
     # -- all .rb files in that directory are automatically loaded.
     config.i18n.default_locale = :es
     config.time_zone = 'Bogota'
-    config.active_record.default_timezone = :utc
+    config.active_record.default_timezone = :local
   end
 end
