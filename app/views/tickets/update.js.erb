@@ -1,0 +1,25 @@
+function printTicket() {
+  const print = document.getElementById("linkImpresora");
+  const zone = '<%= @ticket.parking_zone.name %>'
+  const plate = '<%= @ticket.vehicle.plate %>'
+  const entry = '<%= @ticket.entry %>'
+  const exit = '<%= @ticket.exit %>'
+  const hours = '<%= @ticket.charge/@ticket.parking_zone.price %>'
+  const price = '<%= @ticket.parking_zone.price %>'
+  const charge = '<%= @ticket.charge %>'
+  print.href = `com.fidelier.printfromweb://$intro$$intro$$big$RECIBO PARQUEADERO$intro$$intro$->Placa Del Vehiculo: ${plate}$intro$->Hora ingreso: ${entry}$intro$->Hora salida: ${exit}$intro$->Zona: ${zone}$intro$->Horas facturadas: ${hours} x ${price} $intro$$intro$------>TOTAL COBRO: ${charge}$intro$$intro$$intro$$intro$$cut$$intro$`;
+  print.click();
+}
+
+function printError() {
+  const print = document.getElementById("linkImpresora");
+  print.href = `com.fidelier.printfromweb://$intro$$intro$$biguhw$Ha habido un error, por favor intentelo nuevamente$intro$$intro$$intro$$intro$$cut$$intro$`;
+  print.click();
+}
+
+<% if @ticket.errors.any? %>
+
+<% else %>
+  printTicket();
+  window.location.href = '/tickets/<%= @ticket.id %>'
+<% end %>

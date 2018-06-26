@@ -51,6 +51,15 @@
   display: block;
   text-align: center;
   padding: 8px 0;
+
+  a {
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+    &:active, &:focus {
+      text-decoration: none;
+    }
+  }
 }
 .bottom-menu-btn{
   background-color: transparent;

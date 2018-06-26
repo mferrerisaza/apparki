@@ -5,9 +5,10 @@ class TicketsController < ApplicationController
   def index
     @tickets = Ticket.where(nil)
     @tickets = @tickets.search_by_plate(params[:plate]) if params[:plate].present?
-    @open_tickets = policy_scope(@tickets).where(status: "pendiente")
-    today = Time.now.strftime("%Y%m%d")
-    @close_tickets = policy_scope(@tickets).where(status: "pagado").select{ |t| t.entry.strftime("%Y%m%d") == today}
+    @open_tickets = policy_scope(@tickets).where(status: "pendiente").order(entry: :asc)
+    beginning_of_day = Time.zone.now.beginning_of_day
+    end_of_day = Time.zone.now.end_of_day
+    @close_tickets = policy_scope(@tickets).where(status: "pagado").where(exit: beginning_of_day..end_of_day).order(exit: :desc)
   end
 
   def show
@@ -46,11 +47,17 @@ class TicketsController < ApplicationController
     @ticket.status = "pagado"
     authorize @ticket
     if @ticket.save
-      redirect_to ticket_path(@ticket)
-      flash[:notice] = "Cobro generado con éxito"
+      respond_to do |format|
+        flash[:notice] = "Cobro generado con éxito"
+        format.html { redirect_to ticket_path(@ticket) }
+        format.js
+      end
     else
       flash[:alert] = "Ha ocurrido un error, porfavor inténtalo nuevamente"
-      render 'show'
+      respond_to do |format|
+        format.html { render 'show' }
+        format.js
+      end
     end
   end
 

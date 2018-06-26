@@ -31,7 +31,7 @@
                 </button>
               </li>
               <li class="mdc-list-item" role="menuitem" tabindex="0">
-                <% string = "com.fidelier.printfromweb://$intro$$intro$$biguhw$Tiquete de parqueadero$intro$$intro$->Hora ingreso: #{ticket.entry}$intro$->Placa Del Vehiculo: #{ticket.vehicle.plate}$intro$->Zona: #{ticket.parking_zone.name}$intro$$intro$$intro$$intro$$cut$$intro$" %>
+                <% string = "com.fidelier.printfromweb://$intro$$intro$$biguhw$TIQUETE DE PARQUEADERO$intro$$intro$->Hora ingreso: #{ticket.entry}$intro$->Placa Del Vehiculo: #{ticket.vehicle.plate}$intro$->Zona: #{ticket.parking_zone.name}$intro$$intro$$intro$$intro$$cut$$intro$" %>
                 <a href="<%= string %>" class="menu-charge-btn link-to-btn-style" style="cursor:pointer;">
                   <i class="material-icons">
                     print
@@ -42,9 +42,10 @@
                 </a>
               </li>
               <li class="mdc-list-item" role="menuitem" tabindex="0">
-                <%= simple_form_for(ticket) do |f| %>
+                <%= simple_form_for(ticket, remote: true) do |f| %>
                   <%= f.input :exit, as: :hidden, input_html: { value: Time.zone.now }%>
                   <button class="menu-charge-btn"type="submit" style="cursor:pointer;">
+                    <a href="#" id="linkImpresora" class="hidden"></a>
                     <i class="material-icons">
                       attach_money
                     </i>
@@ -76,7 +77,7 @@
         <% end %>
           <div class="card-car-right">
             <i class="fas fa-dollar-sign fa-sm"></i>
-            <%= humanized_money(money_paid(ticket.entry, ticket.exit, ticket.parking_zone.price_cents)) %>
+            <%= humanized_money(ticket.charge) %>
           </div>
       <% end %>
     </div>
