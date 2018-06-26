@@ -38,8 +38,11 @@
       <h4>Apparki</h4>
     <% end %>
   </div>
-
-  <div class="navbar-wagon-item">
+  <% if controller_name == "tickets" && (action_name == "show" || action_name == "new") %>
+    <div class="navbar-wagon-item item-hidden">
+  <% else %>
+    <div class="navbar-wagon-item">
+  <% end %>
     <i class="material-icons navbar-wagon-icon" data-toggle="modal" data-target="#myModal">
       search
     </i>
