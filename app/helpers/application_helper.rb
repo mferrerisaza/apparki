@@ -52,6 +52,15 @@ module ApplicationHelper
     end
   end
 
+  def amount_per_user_chart_data
+    ParkingZone.all.map do |pa|
+      {
+        zone: pa.name,
+        amount: Ticket.where("parking_zone_id = ?", pa.id).sum(:charge_cents)
+      }
+    end
+  end
+
   private
 
   def minutes_open(entry)

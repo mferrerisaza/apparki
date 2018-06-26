@@ -1,0 +1,79 @@
+<% ActiveRecord::Base.default_timezone = :utc %>
+<div class="card-container bottom-space">
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <div class="graph-container">
+        <h5 class="graph-title"> Ingresos diarios - semana actual </h5>
+        <%= column_chart @week_tickets.group_by_day(:entry, format: "%a", time_zone: "Bogota").sum(:charge_cents), xtitle: "Día", ytitle: "Ingresos", label: "Recaudo"%>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-6">
+      <div class="graph-container">
+        <h5 class="graph-title"> Ingresos semanales - mes actual </h5>
+        <%= column_chart @month_tickets.group_by_week(:entry, format: "%v", time_zone: "America/Bogota").sum(:charge_cents), xtitle: "Semana", ytitle: "Ingresos"%>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-12">
+      <div class="graph-container">
+        <h5 class="graph-title"> Ingresos diarios por zona de parqueo - mes actual </h5>
+          <%= line_chart ParkingZone.all.map { |pz|
+              {name: pz.name, data: @month_tickets.where(parking_zone: pz).group_by_day(:entry, format: "%v", time_zone: "America/Bogota").sum(:charge_cents) }
+          }, xtitle: "Semana", ytitle: "Ingresos"%>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-8">
+      <div class="graph-container">
+        <h5 class="graph-title"> Ingresos semanales por zona de parqueo - mes actual </h5>
+          <%= column_chart ParkingZone.all.map { |pz|
+              {name: pz.name, data: @month_tickets.where(parking_zone: pz).group_by_week(:entry, format: "%v", time_zone: "America/Bogota").sum(:charge_cents)}
+          }, xtitle: "Semana", ytitle: "Ingresos"%>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-4">
+      <div class="graph-container">
+        <h5 class="graph-title"> Porcentaje de ingresos por zonas de parqueo </h5>
+        <%= pie_chart Ticket.joins(:parking_zone).group(:name).sum(:charge_cents)%>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-6">
+      <div class="graph-container">
+        <h5 class="graph-title"> Ingresos diarios por usuario - semana actual </h5>
+        <%= column_chart User.group(:email).joins(:tickets).group_by_day(:entry, time_zone: "America/Bogota", format: "%a").where(tickets: {entry: @beginning_of_week..@end_of_week}).sum(:charge_cents), xtitle: "Día", ytitle: "Ingresos"%>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-6">
+      <div class="graph-container">
+        <h5 class="graph-title"> Ingresos mensuales - año actual </h5>
+        <%= column_chart Ticket.all.group_by_month(:entry, format: "%B", time_zone: "America/Bogota").sum(:charge_cents), xtitle: "Mes", ytitle: "Ingresos", label: "Recaudo"%>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-6">
+      <h5 class="graph-title table-title"> Vehículos con pago pendiente </h5>
+      <div class="table-container">
+        <table class="paleBlueRows">
+          <thead>
+            <tr>
+              <th>Placa</th>
+              <th>Deuda pendiente</th>
+            </tr>
+          </thead>
+          <% @reported_vehicles.each do |k,v| %>
+            <tr>
+              <td><%= k %></td>
+              <td>$ <%=humanize_price(v) %></td>
+            </tr>
+          <% end %>
+          <tfoot>
+            <tr>
+              <td>Total</td>
+              <td>$ <%= humanize_price(@reported_vehicles.values.inject { |a, b| a + b }) %></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<% ActiveRecord::Base.default_timezone = :local %>
+
+
