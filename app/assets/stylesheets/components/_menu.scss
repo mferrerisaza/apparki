@@ -16,6 +16,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    padding: 16px 6px;
     div {
       text-align: left;
       width: 60%;
@@ -23,5 +24,10 @@
   }
   .link-to-btn-style{
     padding: 0px 6px;
+    color: inherit;
+    text-decoration: none;
+    &:active,&:focus {
+      text-decoration: none;
+    }
   }
 }
