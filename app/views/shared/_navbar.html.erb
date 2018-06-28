@@ -24,6 +24,9 @@
           <%= link_to new_ticket_path do %>
             <i class="fas fa-plus-circle"></i> Crear ticket
           <% end %>
+          <%= link_to arqueo_path do %>
+            <i class="fas fa-hand-holding-usd"></i> Cuentas
+          <% end %>
           <%= link_to destroy_user_session_path, method: :delete do %>
             <i class="fas fa-sign-out-alt"></i>  <%= t(".sign_out", default: "Log out") %>
           <% end %>
