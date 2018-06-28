@@ -62,7 +62,7 @@ class TicketsController < ApplicationController
   end
 
   def arqueo
-    @user_tickets = Ticket.user_tickets(current_user).where(entry: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+    @user_tickets = Ticket.user_tickets(current_user)
     authorize @user_tickets
   end
 
