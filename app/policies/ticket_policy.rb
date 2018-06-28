@@ -24,4 +24,8 @@ class TicketPolicy < ApplicationPolicy
   def update?
     edit?
   end
+
+  def arqueo?
+    true
+  end
 end
