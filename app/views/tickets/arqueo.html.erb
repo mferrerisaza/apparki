@@ -1,6 +1,66 @@
 <!-- @user_tickets.each -->
 
-<% @user_tickets.each do |ticket| %>
-  <%= ticket.parking_zone.user.email %>
-<% end %>
-
+<div class="card-container bottom-space">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="arqueo-card-container background-white flex-space-around flex-align-center">
+        <div class="arqueo-card-content">
+          <div class="graph-title no-padding">
+            Total recibido en el día
+          </div>
+          <div class="huge-number flex-space-around">
+            $ <%= subtotal_day(@user_tickets) %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="arqueo-card-container background-white flex-space-around flex-align-center">
+        <div class="arqueo-card-content">
+          <div class="graph-title no-padding small-font-size">
+            Ingresos registrados
+          </div>
+          <div class="big-number flex-space-around">
+            <%= count_day_tickets(@user_tickets) %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="arqueo-card-container background-white flex-space-around flex-align-center">
+        <div class="arqueo-card-content">
+          <div class="graph-title no-padding small-font-size">
+            Vehículos parqueados en tu zona
+          </div>
+          <div class="big-number flex-space-around">
+            <%= count_parked_vehicles(@user_tickets) %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="arqueo-card-container background-white flex-space-around flex-align-center">
+        <div class="arqueo-card-content">
+          <div class="graph-title no-padding small-font-size">
+            Salidas registradas
+          </div>
+          <div class="big-number flex-space-around">
+            <%= count_day_closed_tickets(@user_tickets) %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="arqueo-card-container background-white flex-space-around flex-align-center">
+        <div class="arqueo-card-content">
+          <div class="graph-title no-padding small-font-size">
+            Vehículos reportados
+          </div>
+          <div class="big-number flex-space-around">
+            <%= count_day_warned_tickets(@user_tickets) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
