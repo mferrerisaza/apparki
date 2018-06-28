@@ -1,0 +1,6 @@
+<!-- @user_tickets.each -->
+
+<% @user_tickets.each do |ticket| %>
+  <%= ticket.parking_zone.user.email %>
+<% end %>
+
