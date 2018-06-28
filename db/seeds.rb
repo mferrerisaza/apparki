@@ -11,6 +11,27 @@ ParkingZone.destroy_all
 User.destroy_all
 Vehicle.destroy_all
 
+def randomize_plate
+  letters = %w[A B C D E F G H I J K L M N O P Q R S T U V W X Y Z]
+  numbers = %w[1 2 3 4 5 6 7 8 9 0]
+  plate = ""
+  3.times do
+    letter = letters.sample
+    plate << letter
+  end
+
+  3.times do
+    number = numbers.sample
+    plate << number
+  end
+  plate
+end
+
+def randomize_vehicle
+  offset = rand(Vehicle.count)
+  Vehicle.offset(offset).first
+end
+
 p "Empezando..."
 p "Creando Usuarios"
 
@@ -62,46 +83,20 @@ p "Zona de parqueo 3 creada"
 
 p "Creando Vehículos"
 
-v1 = Vehicle.new(
-  plate: "DJP779"
+60.times do |t|
+  v = "v#{t}"
+  v = Vehicle.new(
+  plate: randomize_plate
   )
-
-p "Vehiculo 1 creado"
-
-v1.save!
-
-v2 = Vehicle.new(
-  plate: "FAT458"
-  )
-
-p "Vehiculo 2 creado"
-
-v2.save!
-
-v3 = Vehicle.new(
-  plate: "RIG165"
-  )
-
-p "Vehiculo 3 creado"
-
-v3.save!
-
-v4 = Vehicle.new(
-  plate: "RIG525"
-  )
-
-p "Vehiculo 4 creado"
-
-v4.save!
-
-p "Creando Tickets"
+  p "Vehiculo #{t} creado"
+  v.save!
+end
 
 t1 = Ticket.new(
   entry: (Time.zone.now - 2.hours),
   status: "pendiente",
-  vehicle: v1,
+  vehicle: randomize_vehicle,
   parking_zone: z1,
-  charge: 2000,
   )
 t1.save!
 p "Ticket 1 creado"
@@ -109,9 +104,8 @@ p "Ticket 1 creado"
 t2 = Ticket.new(
   entry: (Time.zone.now - 1.hours),
   status: "pendiente",
-  vehicle: v2,
+  vehicle: randomize_vehicle,
   parking_zone: z2,
-  charge: 2000,
   )
 t2.save!
 p "Ticket 2 creado"
@@ -120,18 +114,18 @@ t3 = Ticket.new(
   entry: (Time.zone.now - 2.hours),
   exit: (Time.zone.now),
   status: "pagado",
-  vehicle: v3,
+  vehicle: randomize_vehicle,
   parking_zone: z3,
-  charge: 2000,
+  charge: 4000,
   )
 t3.save!
 p "Ticket 3 creado"
 
 t4 = Ticket.new(
   entry: (Time.zone.now - 2.hours),
-  exit: (Time.zone.now - 2.hours),
+  exit: (Time.zone.now - 1.hours),
   status: "pagado",
-  vehicle: v4,
+  vehicle: randomize_vehicle,
   parking_zone: z3,
   charge: 2000,
   )
@@ -140,42 +134,69 @@ p "Ticket 4 creado"
 
 400.times do |time|
   entry = rand(0..2160)
-  hours = rand(0..4)
+  hours = rand(1..6)
   t = Ticket.new(
   entry: (Time.zone.now - entry.hours),
-  exit: (Time.zone.now - entry.hours + hours),
+  exit: (Time.zone.now - entry.hours + hours.hours),
   status: "pagado",
-  vehicle: v4,
+  vehicle: randomize_vehicle,
   parking_zone: [z1, z2, z3, z3].sample,
   charge: 2000 * hours,
   )
-  t.save!
-  p "Ticket #{time} creado"
+  if t.save
+    p "Ticket #{time + 5} creado"
+  else
+    p "Ticket #{time + 5} NO creado"
+  end
 end
 
 
 10.times do |time|
   entry = rand(0..480)
-  hours = rand(0..4)
+  hours = rand(1..6)
   t = Ticket.new(
   entry: (Time.zone.now - entry.hours),
-  exit: (Time.zone.now - entry.hours + hours),
+  exit: (Time.zone.now - entry.hours + hours.hours),
   status: "reportado",
-  vehicle: [v1, v2, v3, v4].sample,
+  vehicle: randomize_vehicle,
   parking_zone: [z1, z2, z3, z3].sample,
   charge: 2000 * hours,
   )
-  t.save!
-  p "Ticket #{time} creado"
+  if t.save
+    p "Ticket #{time + 405 } creado"
+  else
+    p "Ticket #{time + 405 } NO creado"
+  end
 end
 
-textra = Ticket.new(
-  entry: (Time.zone.now.end_of_day),
-  exit: (Time.zone.now.end_of_day + 2.hours),
+10.times do |time|
+  entry = rand(0..5)
+  hours = rand(1..6)
+  t = Ticket.new(
+  entry: (Time.zone.now - entry.hours),
+  exit: (Time.zone.now - entry.hours + hours.hours),
+  status: "reportado",
+  vehicle: randomize_vehicle,
+  parking_zone: [z1, z2, z3, z3].sample,
+  charge: 2000 * hours,
+  )
+  if t.save
+    p "Ticket #{time + 414 } creado"
+  else
+    p "Ticket #{time + 414 } NO creado"
+  end
+end
+
+t = Ticket.new(
+  entry: (Time.zone.now),
+  exit: (Time.zone.now + 2.hours),
   status: "pagado",
-  vehicle: v4,
-  parking_zone: z2,
+  parking_zone: z1,
+  vehicle: randomize_vehicle,
   charge: 2000 * 2,
   )
-textra.save!
-p "Ticket extra creado"
+if t.save
+  p "Ticket de prueba creado"
+else
+  p "Ticket de prueba NO creado"
+end
