@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 ruby '2.4.4'
 
+gem 'axlsx_rails'
+gem 'axlsx', '= 2.0.1'
 gem 'carrierwave', '~> 1.2'
 gem 'cloudinary'
 gem "chartkick"
@@ -12,6 +14,7 @@ gem 'pg', '~> 0.21'
 gem 'puma'
 gem 'rails', '5.1.6'
 gem 'redis'
+gem 'rubyzip', '= 1.0.0'
 
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass', '~> 3.3'

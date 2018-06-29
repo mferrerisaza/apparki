@@ -1,5 +1,11 @@
 <% ActiveRecord::Base.default_timezone = :utc %>
 <div class="card-container bottom-space">
+  <div class="align-right">
+    <div class="mdc-button export-btn-margin text-white background-gray">
+      <i class="material-icons mdc-button__icon" aria-hidden="true">cloud_download</i>
+      <%= link_to "Exportar a excel", dashboard_path(format: "xlsx"), class: "text-white" %>
+    </div>
+  </div>
   <div class="row">
     <div class="col-xs-12 col-md-6">
       <div class="graph-container">
