@@ -1,0 +1,11 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Tickets") do |sheet|
+  # this is the head row of your spreadsheet
+  sheet.add_row %w(id_tiquete fecha_entrada fecha_salida zona_parqueo placa_vehículo estado_del_tiquete precio)
+
+  # each user is a row on your spreadsheet
+  @tickets.each do |ticket|
+    sheet.add_row [ticket.id, ticket.entry, ticket.exit, ticket.parking_zone.name, ticket.vehicle.plate, ticket.status, ticket.charge_cents/100]
+  end
+end
