@@ -7,7 +7,7 @@ function printTicket() {
   const hours = '<%= @ticket.charge/@ticket.parking_zone.price %>'
   const price = '<%= @ticket.parking_zone.price %>'
   const charge = '<%= @ticket.charge %>'
-  print.href = `com.fidelier.printfromweb://$intro$$intro$$big$RECIBO PARQUEADERO$intro$$intro$->Placa Del Vehiculo: ${plate}$intro$->Hora ingreso: ${entry}$intro$->Hora salida: ${exit}$intro$->Zona: ${zone}$intro$->Horas facturadas: ${hours} x ${price} $intro$$intro$------>TOTAL COBRO: ${charge}$intro$$intro$$intro$$intro$$cut$$intro$`;
+  print.href = `com.fidelier.printfromweb://$intro$$intro$$big$RECIBO PARQUEADERO$intro$$intro$->Tiquete_id: ${id}$intro$->Placa Del Vehiculo: ${plate}$intro$->Hora ingreso: ${entry}$intro$->Hora salida: ${exit}$intro$->Zona: ${zone}$intro$->Horas facturadas: ${hours} x ${price} $intro$$intro$------>TOTAL COBRO: ${charge}$intro$$intro$$intro$$intro$$cut$$intro$`;
   print.click();
 }
 
