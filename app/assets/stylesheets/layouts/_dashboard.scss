@@ -54,9 +54,43 @@ table.paleBlueRows tfoot td {
 }
 
 .background-white {
-  // background-color: white;
+  background-color: white;
 }
 
-.bottom-space{
+.bottom-space {
   margin-bottom: 24px;
+}
+
+.huge-number {
+  font-size: 48px;
+ }
+
+ .big-number {
+  font-size: 28px;
+ }
+
+.flex-space-around {
+  display: flex;
+  justify-content: space-around;
+ }
+
+.small-font-size {
+  font-size: 14px;
+}
+
+.arqueo-card-container {
+  margin: 8px 0px;
+  height:120px;
+}
+
+.bottom-padding-big {
+  padding-bottom: 24px;
+}
+
+.flex-align-center {
+  align-items: center;
+}
+
+.no-padding {
+  padding: 0px
 }

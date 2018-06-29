@@ -72,4 +72,8 @@ class Ticket < ApplicationRecord
     end
     group_tickets = Ticket.where(entry: beg..endd)
   end
+
+  def self.user_tickets(user)
+    Ticket.joins(:parking_zone).where(parking_zones: {user: user}).where(entry: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+  end
 end

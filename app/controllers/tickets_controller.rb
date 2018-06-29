@@ -61,9 +61,9 @@ class TicketsController < ApplicationController
     end
   end
 
-  def report_data
-    @data = Ticket.build_data
-    render json: @data
+  def arqueo
+    @user_tickets = Ticket.user_tickets(current_user)
+    authorize @user_tickets
   end
 
   private

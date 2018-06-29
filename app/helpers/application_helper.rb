@@ -56,9 +56,29 @@ module ApplicationHelper
     ParkingZone.all.map do |pa|
       {
         zone: pa.name,
-        amount: Ticket.where("parking_zone_id = ?", pa.id).sum(:charge_cents)
+        amount: Ticket.where("parking_zone_id = ?", pa.id).sum(:charge_cents)/100
       }
     end
+  end
+
+  def subtotal_day(tickets)
+    humanize_price(tickets.sum(:charge_cents)/100)
+  end
+
+  def count_day_tickets(tickets)
+    tickets.size
+  end
+
+  def count_day_closed_tickets(tickets)
+    tickets.select {|ticket| ticket.exit.present? && ticket.status == "pagado"}.size
+  end
+
+  def count_day_warned_tickets(tickets)
+    tickets.select {|ticket| ticket.status == "reportado"}.size
+  end
+
+  def count_parked_vehicles(tickets)
+    tickets.select {|ticket| ticket.status == "pendiente"}.size
   end
 
   private

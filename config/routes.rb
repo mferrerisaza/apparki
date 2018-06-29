@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   resources :tickets, except: [:delete]
   get "/report_data", to: "tickets#report_data", as: "report_data"
   get "dashboard", to: "pages#dashboard", as: "dashboard"
+  get "arqueo", to: "tickets#arqueo", as: "arqueo"
 end

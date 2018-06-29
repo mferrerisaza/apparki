@@ -1,7 +1,7 @@
 <div class="navbar-wagon">
   <div class="navbar-wagon-item">
 
-      <% if params[:plate].present? || action_name == "show" || action_name == "new"    %>
+      <% if params[:plate].present? || action_name == "show" || action_name == "new" || action_name == "arqueo"    %>
         <%= link_to tickets_path do %>
           <i class="material-icons navbar-wagon-icon">
             arrow_back
@@ -24,6 +24,9 @@
           <%= link_to new_ticket_path do %>
             <i class="fas fa-plus-circle"></i> Crear ticket
           <% end %>
+          <%= link_to arqueo_path do %>
+            <i class="fas fa-hand-holding-usd"></i> Cuentas
+          <% end %>
           <%= link_to destroy_user_session_path, method: :delete do %>
             <i class="fas fa-sign-out-alt"></i>  <%= t(".sign_out", default: "Log out") %>
           <% end %>
@@ -38,7 +41,7 @@
       <h4>Apparki</h4>
     <% end %>
   </div>
-  <% if controller_name == "tickets" && (action_name == "show" || action_name == "new") %>
+  <% if controller_name == "tickets" && (action_name == "show" || action_name == "new") || action_name == "arqueo" %>
     <div class="navbar-wagon-item item-hidden">
   <% else %>
     <div class="navbar-wagon-item">
