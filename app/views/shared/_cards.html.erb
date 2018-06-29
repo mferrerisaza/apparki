@@ -31,7 +31,7 @@
                 </button>
               </li>
               <li class="mdc-list-item" role="menuitem" tabindex="0">
-                <% string = "com.fidelier.printfromweb://$intro$$intro$$biguhw$TIQUETE DE PARQUEADERO$intro$$intro$->Hora ingreso: #{ticket.entry}$intro$->Placa Del Vehiculo: #{ticket.vehicle.plate}$intro$->Zona: #{ticket.parking_zone.name}$intro$$intro$$intro$$intro$$cut$$intro$" %>
+                <% string = "com.fidelier.printfromweb://$intro$$intro$$biguhw$TIQUETE DE PARQUEADERO$intro$$intro$->Tiquete_id: ${ticket.id}$intro$->Hora ingreso: #{ticket.entry}$intro$->Placa Del Vehiculo: #{ticket.vehicle.plate}$intro$->Zona: #{ticket.parking_zone.name}$intro$$intro$$intro$$intro$$cut$$intro$" %>
                 <a href="<%= string %>" class="menu-charge-btn link-to-btn-style" style="cursor:pointer;">
                   <i class="material-icons">
                     print
