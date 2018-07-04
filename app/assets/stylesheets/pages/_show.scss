@@ -8,6 +8,9 @@
   font-weight: 600;
   margin: 0px;
 }
+.red-penalty {
+   color: #C80C00;
+}
 
 .show-row {
   margin: 0px;
@@ -91,7 +94,12 @@
   text-align: center;
   border-radius: 4px;
   background-color: rgba(98,200,60,0.4);
+  color: #00490B;
   padding: 2px 5px;
+}
+.red-box{
+  background-color: #FF8E8E;
+  color: #C80C00;
 }
 
 .show-total-price {

@@ -8,7 +8,9 @@
 </div>
 
 <div class="card-container">
-  <h5 class="show-title text-center gray-background">Resumen de la factura</h5>
+  <h5 class="show-title text-center gray-background <%= "red-penalty" if @ticket.status == "reportado" %>">
+    <%= @ticket.status == "pagado" ?  "Resumen de la factura:" : "Resumen del reporte:"%>
+  </h5>
   <div class="row">
     <div class="col-xs-12 no-padding">
       <div class="card show-row">
@@ -78,7 +80,7 @@
           </i>
         </div>
         <div class="show-row-center">
-          Fecha de salida:
+          <%= @ticket.status == "pagado" ?  "Fecha de salida:" : "Fecha reporte:"%>
         </div>
         <div class="show-row-right">
           <% if @ticket.exit %>
@@ -95,7 +97,7 @@
           </i>
         </div>
         <div class="show-row-center">
-          Hora de salida:
+          <%= @ticket.status == "pagado" ?  "Hora de salida:" : "Hora de reporte:"%>
         </div>
         <div class="show-row-right">
           <% if @ticket.exit %>
@@ -129,7 +131,7 @@
           </div>
           <div class="show-row-right">
             <div class="show-total-price">
-              <div class="green-box">
+              <div class="green-box <%= "red-box" if @ticket.status == "reportado" %>">
                 <i class="fas fa-dollar-sign fa-sm"></i>
                 <%= humanize_price(@ticket.charge) %>
               </div>
