@@ -44,46 +44,14 @@
       <div class="card show-row">
         <div class="show-icon">
           <i class="material-icons">
-            date_range
-          </i>
-        </div>
-        <div class="show-row-center">
-          Fecha de ingreso:
-        </div>
-        <div class="show-row-right">
-          <%= @ticket.entry.strftime("%x") %>
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-12 no-padding">
-      <div class="card show-row">
-        <div class="show-icon">
-          <i class="material-icons">
             radio_button_checked
           </i>
         </div>
         <div class="show-row-center">
-          Hora de ingreso:
+          Ingreso:
         </div>
         <div class="show-row-right">
-          <%= @ticket.entry.strftime("%R") %>
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-12 no-padding">
-      <div class="card show-row">
-        <div class="show-icon">
-          <i class="material-icons">
-            date_range
-          </i>
-        </div>
-        <div class="show-row-center">
-          Fecha de salida:
-        </div>
-        <div class="show-row-right">
-          <% if @ticket.exit %>
-            <%= (@ticket.exit).strftime("%x") %>
-          <% end %>
+          <%= "#{@ticket.entry.strftime("%x")}  - #{@ticket.entry.strftime("%R")}"%>
         </div>
       </div>
     </div>
@@ -95,11 +63,11 @@
           </i>
         </div>
         <div class="show-row-center">
-          Hora de salida:
+          Salida:
         </div>
         <div class="show-row-right">
           <% if @ticket.exit %>
-            <%= (@ticket.exit).strftime("%R") %>
+            <%= "#{(@ticket.exit).strftime("%x")} - #{(@ticket.exit).strftime("%R")}" %>
           <% end %>
         </div>
       </div>
