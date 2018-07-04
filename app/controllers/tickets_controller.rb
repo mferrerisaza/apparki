@@ -43,7 +43,7 @@ class TicketsController < ApplicationController
   def update
     @ticket = Ticket.find(params[:id])
     @ticket.exit = ticket_params[:exit]
-    @ticket.update_charge
+    @ticket.charge = @ticket.update_charge
     @ticket.status = "pagado"
     authorize @ticket
     if @ticket.save
@@ -82,5 +82,6 @@ class TicketsController < ApplicationController
 
   def set_ticket
     @ticket = Ticket.find(params[:id])
+    @vehicle = @ticket.vehicle
   end
 end
