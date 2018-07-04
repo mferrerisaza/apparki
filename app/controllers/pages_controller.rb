@@ -13,7 +13,7 @@ class PagesController < ApplicationController
     @beginning_of_week = Time.zone.now.beginning_of_week
     @end_of_week = Time.zone.now.end_of_week
     @reported_tickets = Ticket.where(status: "reportado")
-    @reported_vehicles = @reported_tickets.joins(:vehicle).group(:plate).sum(:charge_cents)
+    # @reported_vehicles = @reported_tickets.joins(:vehicle).group(:plate).sum(:charge_cents)
 
     respond_to do |format|
       format.html
