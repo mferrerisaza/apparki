@@ -60,19 +60,25 @@
           <thead>
             <tr>
               <th>Placa</th>
+              <th>Fecha de ingreso</th>
+              <th>Fecha de reporte</th>
               <th>Deuda pendiente</th>
             </tr>
           </thead>
-          <% @reported_vehicles.each do |k,v| %>
+          <% @reported_tickets.order('charge_cents DESC').each do |ticket| %>
             <tr>
-              <td><%= k %></td>
-              <td>$ <%=humanize_price(v) %></td>
+              <td><%= ticket.vehicle.plate %></td>
+              <td><%=ticket.entry.strftime('%x - %H:%M:%S') %></td>
+              <td><%=ticket.exit.strftime('%x - %H:%M:%S') %></td>
+              <td>$ <%= humanize_price(ticket.charge) %></td>
             </tr>
           <% end %>
           <tfoot>
             <tr>
               <td>Total</td>
-              <td>$ <%= humanize_price(@reported_vehicles.values.inject { |a, b| a + b }) %></td>
+              <td></td>
+              <td></td>
+              <td>$ <%= humanize_price(@reported_tickets.sum(:charge_cents)/100) %></td>
             </tr>
           </tfoot>
         </table>
