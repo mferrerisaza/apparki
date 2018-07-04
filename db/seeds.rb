@@ -200,8 +200,7 @@ end
   parking_zone: [z1, z2, z3, z3].sample,
   entry_user: u1,
   exit_user: u2,
-
-  # charge: 2000 * hours,
+  charge: 2000 * hours,
   )
   if t.save
     p "Ticket #{time + 414 }"
