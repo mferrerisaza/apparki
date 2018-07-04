@@ -15,7 +15,7 @@ module ApplicationHelper
     minutos_sobrantes = min_sobr(horas)
     return "#{minutos} minuto facturado" if minutos == 1
     return "#{minutos} minutos facturados" if minutos < 60
-    return "#{horas.floor} horafacturada" if horas == 1 && minutos_sobrantes == 0
+    return "#{horas.floor} hora facturada" if horas == 1 && minutos_sobrantes == 0
     return "#{horas.floor} hora y #{minutos_sobrantes.ceil} minutos facturados" if horas == 1
     return "#{horas.floor} horas facturadas" if minutos_sobrantes = 0
     return "#{horas.floor} horas y #{minutos_sobrantes.ceil} minutos facturados"
