@@ -9,6 +9,7 @@ class TicketsController < ApplicationController
     beginning_of_day = Time.zone.now.beginning_of_day
     end_of_day = Time.zone.now.end_of_day
     @close_tickets = policy_scope(@tickets).where(status: "pagado").where(exit: beginning_of_day..end_of_day).order(exit: :desc)
+    @reported_tickets = policy_scope(@tickets).where(status: "reportado").where(exit: beginning_of_day..end_of_day).order(exit: :desc)
   end
 
   def show
