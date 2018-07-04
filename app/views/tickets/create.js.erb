@@ -9,7 +9,8 @@ function printTicket() {
   const zone = zoneSelect.options[zoneSelect.selectedIndex].text;
   const plate = document.getElementById("my-text-field").value.toUpperCase();
   const entry = document.getElementById("ticket_entry").value;
-  print.href = `com.fidelier.printfromweb://$intro$$intro$$biguhw$TIQUETE DE PARQUEADERO$intro$$intro$->Hora ingreso: ${entry}$intro$->Placa Del Vehiculo: ${plate}$intro$->Zona: ${zone}$intro$$intro$$intro$$intro$$cut$$intro$`;
+  const id = '<%= @ticket.id %>';
+  print.href = `com.fidelier.printfromweb://$intro$$intro$$biguhw$TIQUETE DE PARQUEADERO$intro$$intro$->Tiquete_id: ${id}$intro$->Hora ingreso: ${entry}$intro$->Placa Del Vehiculo: ${plate}$intro$->Zona: ${zone}$intro$$intro$$intro$$intro$$cut$$intro$`;
   print.click();
 }
 
