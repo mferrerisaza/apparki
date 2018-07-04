@@ -30,7 +30,7 @@ class Ticket < ApplicationRecord
     tickets_today = Ticket.where(vehicle: self.vehicle).where.not(status: "pendiente").where(entry: beginning_of_day..end_of_day).size
     hours =  0
     hours = time_parked.ceil unless tickets_today.zero? && grace_time >= time_parked
-    self.charge = hours * parking_zone.price
+    hours * parking_zone.price
   end
 
   def self.build_data(args = {})
