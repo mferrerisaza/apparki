@@ -142,14 +142,17 @@
 </div>
 
 <div class="show-bottom-menu <%= "hidden" if @ticket.status == "pagado" %> ">
-  <div class="bottom-menu-element bottom-menu-left">
-    <i class="material-icons">
-      error_outline
-    </i>
-    <div class="bottom-menu-option-text">
-      Reportar
-    </div>
-  </div>
+  <%= simple_form_for(@vehicle) do |f| %>
+    <%= f.association :tickets, as: :hidden, input_html: { value: @ticket.id }%>
+    <button class="bottom-menu-element bottom-menu-left bottom-menu-btn" type="submit" style="cursor:pointer;">
+      <i class="material-icons">
+        error_outline
+      </i>
+      <div class="bottom-menu-option-text">
+        Reportar
+      </div>
+    </button>
+  <% end %>
   <div class="bottom-menu-element bottom-menu-center">
     <% string = "com.fidelier.printfromweb://$intro$$intro$$biguhw$TIQUETE DE PARQUEADERO$intro$$intro$->Tiquete_id: ${@ticket.id}$intro$->Hora ingreso: #{@ticket.entry}$intro$->Placa Del Vehiculo: #{@ticket.vehicle.plate}$intro$->Zona: #{@ticket.parking_zone.name}$intro$$intro$$intro$$intro$$cut$$intro$" %>
     <a href="<%= string %>" >
