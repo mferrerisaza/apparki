@@ -49,6 +49,13 @@ u2 = User.new(
 p "Usuario 2 creado"
 u2.save!
 
+u3 = User.new(
+  email: "test@gmail.com",
+  password: "123456",
+  )
+p "Usuario prueba creado"
+u3.save!
+
 p "Creando Zonas de parqueo"
 
 z1 = ParkingZone.new(
@@ -97,6 +104,7 @@ t1 = Ticket.new(
   status: "pendiente",
   vehicle: randomize_vehicle,
   parking_zone: z1,
+  entry_user: u1,
   )
 t1.save!
 p "Ticket 1 creado #{t1.charge}"
@@ -106,6 +114,7 @@ t2 = Ticket.new(
   status: "pendiente",
   vehicle: randomize_vehicle,
   parking_zone: z2,
+  entry_user: u1,
   )
 t2.save!
 p "Ticket 2 creado #{t2.charge}"
@@ -116,6 +125,8 @@ t3 = Ticket.new(
   status: "pagado",
   vehicle: randomize_vehicle,
   parking_zone: z3,
+  entry_user: u1,
+  exit_user: u2,
   charge: 4000,
   )
 t3.save!
@@ -127,6 +138,9 @@ t4 = Ticket.new(
   status: "pagado",
   vehicle: randomize_vehicle,
   parking_zone: z3,
+  entry_user: u1,
+  exit_user: u2,
+
   charge: 2000,
   )
 t4.save!
@@ -141,6 +155,9 @@ p "Ticket 4 creado #{t4.charge}"
   status: "pagado",
   vehicle: randomize_vehicle,
   parking_zone: [z1, z2, z3, z3].sample,
+  entry_user: u1,
+  exit_user: u2,
+
   charge: 2000 * hours,
   )
   if t.save
@@ -160,6 +177,9 @@ end
   status: "reportado",
   vehicle: randomize_vehicle,
   parking_zone: [z1, z2, z3, z3].sample,
+  entry_user: u1,
+  exit_user: u2,
+
   charge: 2000 * hours,
   )
   if t.save
@@ -178,6 +198,9 @@ end
   status: "pendiente",
   vehicle: randomize_vehicle,
   parking_zone: [z1, z2, z3, z3].sample,
+  entry_user: u1,
+  exit_user: u2,
+
   # charge: 2000 * hours,
   )
   if t.save
@@ -192,6 +215,24 @@ t = Ticket.new(
   exit: (Time.zone.now + 2.hours),
   status: "pagado",
   parking_zone: z1,
+  entry_user: u3,
+  exit_user: u1,
+  vehicle: randomize_vehicle,
+  charge: 2000 * 2,
+  )
+if t.save
+  p "Ticket de prueba creado #{t.charge}"
+else
+  p "Ticket de prueba NO creado"
+end
+
+t = Ticket.new(
+  entry: (Time.zone.now),
+  exit: (Time.zone.now + 2.hours),
+  status: "pagado",
+  parking_zone: z1,
+  entry_user: u1,
+  exit_user: u3,
   vehicle: randomize_vehicle,
   charge: 2000 * 2,
   )
