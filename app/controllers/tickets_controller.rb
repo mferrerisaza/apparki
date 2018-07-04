@@ -26,6 +26,7 @@ class TicketsController < ApplicationController
     @vehicle = nil unless @vehicle.valid?
     @ticket = Ticket.new(ticket_params)
     @ticket.vehicle = @vehicle unless @vehicle.nil?
+    @ticket.entry_user = current_user
     authorize @ticket
     if @ticket.save
       respond_to do |format|
@@ -44,6 +45,7 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find(params[:id])
     @ticket.exit = ticket_params[:exit]
     @ticket.update_charge
+    @ticket.exit_user = current_user
     @ticket.status = "pagado"
     authorize @ticket
     if @ticket.save
