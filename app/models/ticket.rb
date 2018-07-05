@@ -4,6 +4,7 @@ class Ticket < ApplicationRecord
   belongs_to :vehicle
 
   monetize :charge_cents
+  # monetize :charge_paid_cents
   mount_uploader :picture, PhotoUploader
 
   validates :entry, :status, presence: true
