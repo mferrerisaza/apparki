@@ -9,6 +9,7 @@ class TicketsController < ApplicationController
     beginning_of_day = Time.zone.now.beginning_of_day
     end_of_day = Time.zone.now.end_of_day
     @close_tickets = policy_scope(@tickets).where(status: "pagado").where(exit: beginning_of_day..end_of_day).order(exit: :desc)
+    @reported_tickets = policy_scope(@tickets).where(status: "reportado").where(exit: beginning_of_day..end_of_day).order(exit: :desc)
   end
 
   def show
@@ -29,6 +30,7 @@ class TicketsController < ApplicationController
     @ticket.entry_user = current_user
     authorize @ticket
     if @ticket.save
+      flash[:alert] = "El vehículo tiene deudas por: #{ helpers.humanized_money @vehicle.debt }" if @vehicle.debt?
       respond_to do |format|
         format.html { redirect_to tickets_path }
         format.js
@@ -44,8 +46,10 @@ class TicketsController < ApplicationController
   def update
     @ticket = Ticket.find(params[:id])
     @ticket.exit = ticket_params[:exit]
-    @ticket.update_charge
     @ticket.exit_user = current_user
+    @ticket.charge = @ticket.update_charge
+    @debt = @ticket.vehicle.debt
+    @ticket.vehicle.clean_debt
     @ticket.status = "pagado"
     authorize @ticket
     if @ticket.save
@@ -84,5 +88,6 @@ class TicketsController < ApplicationController
 
   def set_ticket
     @ticket = Ticket.find(params[:id])
+    @vehicle = @ticket.vehicle
   end
 end

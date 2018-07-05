@@ -15,10 +15,22 @@ module ApplicationHelper
     minutos_sobrantes = min_sobr(horas)
     return "#{minutos} minuto facturado" if minutos == 1
     return "#{minutos} minutos facturados" if minutos < 60
-    return "#{horas.floor} horafacturada" if horas == 1 && minutos_sobrantes == 0
+    return "#{horas.floor} hora facturada" if horas == 1 && minutos_sobrantes == 0
     return "#{horas.floor} hora y #{minutos_sobrantes.ceil} minutos facturados" if horas == 1
     return "#{horas.floor} horas facturadas" if minutos_sobrantes = 0
     return "#{horas.floor} horas y #{minutos_sobrantes.ceil} minutos facturados"
+  end
+
+  def penalty_time(entry, exit)
+    minutos = minutes_closed(entry, exit)
+    horas = hours(minutos)
+    minutos_sobrantes = min_sobr(horas)
+    return "#{minutos} minuto reportado" if minutos == 1
+    return "#{minutos} minutos reportados" if minutos < 60
+    return "#{horas.floor} hora reportada" if horas == 1 && minutos_sobrantes == 0
+    return "#{horas.floor} hora y #{minutos_sobrantes.ceil} minutos reportados" if horas == 1
+    return "#{horas.floor} horas reportadas" if minutos_sobrantes == 0
+    return "#{horas.floor} horas y #{minutos_sobrantes.ceil} minutos reportados"
   end
 
   def money_paid(entry, exit, price)

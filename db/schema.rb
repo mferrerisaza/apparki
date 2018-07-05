@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20180704165549) do
     t.string "plate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "debt_cents", default: 0, null: false
   end
 
   add_foreign_key "parking_zones", "users"

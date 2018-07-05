@@ -71,7 +71,11 @@
               <%= ticket.vehicle.plate.upcase %>
             </div>
             <div class="card-car-central-sec">
-              <%= paid_time(ticket.entry, ticket.exit) %>
+              <% if ticket.status == "pagado" %>
+                <%= paid_time(ticket.entry, ticket.exit) %>
+              <% else %>
+                <%= penalty_time(ticket.entry, ticket.exit) %>
+              <% end %>
             </div>
           </div>
         <% end %>

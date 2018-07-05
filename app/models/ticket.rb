@@ -25,14 +25,23 @@ class Ticket < ApplicationRecord
   end
 
   def update_charge
-    time_parked = (exit-entry)/1.hour
+    if exit.blank?
+      time_parked = (Time.zone.now-entry)/1.hour
+    else
+      time_parked = (exit-entry)/1.hour
+    end
     grace_time =  0.25
-    beginning_of_day = Time.zone.now.beginning_of_day
-    end_of_day = Time.zone.now.end_of_day
-    tickets_today = Ticket.where(vehicle: self.vehicle).where.not(status: "pendiente").where(entry: beginning_of_day..end_of_day).size
+    # beginning_of_day = Time.zone.now - 3.hours
+    # end_of_day = Time.zone.now
+    # tickets_today = Ticket.where(vehicle: self.vehicle).where.not(status: "pendiente").where(entry: beginning_of_day..end_of_day)
+    # time_frame_array = tickets_today.map { |ticket| (ticket.exit-ticket.entry)/1.hour }
+    # time = time_frame_array.reduce(:+)
+    # time = 0 if time.blank?
     hours =  0
-    hours = time_parked.ceil unless tickets_today.zero? && grace_time >= time_parked
-    self.charge = hours * parking_zone.price
+    unless grace_time >= time_parked
+      hours = time_parked - time_parked.floor >= 1 / 60.0 ?  time_parked.ceil : time_parked.floor
+    end
+    hours * parking_zone.price
   end
 
   def self.build_data(args = {})
