@@ -26,7 +26,7 @@ class TicketsController < ApplicationController
     @vehicle = Vehicle.create(plate: vehicle_params[:plate].upcase) if @vehicle.blank?
     @vehicle = nil unless @vehicle.valid?
     @ticket = Ticket.new(ticket_params)
-    @ticket.charge_paid_cents = Ticket.calc_anticipo(ticket_params)
+    @ticket.charge_paid_cents = Ticket.calc_anticipo(ticket_params).to_money
     @ticket.vehicle = @vehicle unless @vehicle.nil?
     authorize @ticket
     if @ticket.save
