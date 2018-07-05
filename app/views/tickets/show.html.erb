@@ -90,7 +90,7 @@
         </div>
       </div>
     </div>
-    <% if @ticket.charge_paid_cents > 0 && @ticket.status == "pendiente" %>
+    <% if @ticket.charge_paid_cents > 0 && (@ticket.status == "pendiente" || @ticket.status == "reportado") %>
       <div class="col-xs-12 no-padding">
         <div class="card show-row">
           <div class="show-icon">
@@ -143,9 +143,9 @@
             <div class="green-box <%= "red-box" if @ticket.status == "reportado" %>">
               <i class="fas fa-dollar-sign fa-sm"></i>
               <% if @ticket.status != "pendiente" %>
-                <%= humanize_price(@ticket.charge_cents) %>
+                <%= humanize_price(@ticket.charge_cents/100) %>
               <% else %>
-                <%= (humanize_price(@ticket.update_charge + @vehicle.debt - @ticket.charge_paid_cents.to_money)) %>
+                <%= humanize_price(@ticket.update_charge + @vehicle.debt - @ticket.charge_paid_cents.to_money) %>
               <% end %>
             </div>
           </div>
