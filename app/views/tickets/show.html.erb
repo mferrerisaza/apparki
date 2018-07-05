@@ -54,7 +54,6 @@
         </div>
         <div class="show-row-right">
           <%= "#{@ticket.entry.strftime("%x")}  - #{@ticket.entry.strftime("%R")}"%>
-          <%#= @ticket.entry.strftime("%x") %>
         </div>
       </div>
     </div>
@@ -71,7 +70,6 @@
         <div class="show-row-right">
           <% if @ticket.exit %>
             <%= "#{(@ticket.exit).strftime("%x")} - #{(@ticket.exit).strftime("%R")}" %>
-            <%#= (@ticket.exit).strftime("%x") %>
           <% end %>
         </div>
       </div>
@@ -92,6 +90,27 @@
         </div>
       </div>
     </div>
+    <% if @ticket.charge_paid_cents > 0 && @ticket.status == "pendiente" %>
+      <div class="col-xs-12 no-padding">
+        <div class="card show-row">
+          <div class="show-icon">
+          <i class="material-icons">
+            spellcheck
+          </i>
+          </div>
+          <div class="show-row-center">
+            Anticipo pagado:
+          </div>
+          <div class="show-row-right">
+            <div class="show-total-price">
+              <i class="fas fa-dollar-sign fa-sm"></i>
+              <%= humanize_price(@ticket.charge_paid_cents) %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
     <% if @vehicle.debt? && @ticket.status == "pendiente"%>
       <div class="col-xs-12 no-padding">
         <div class="card show-row">
@@ -124,9 +143,9 @@
             <div class="green-box <%= "red-box" if @ticket.status == "reportado" %>">
               <i class="fas fa-dollar-sign fa-sm"></i>
               <% if @ticket.status != "pendiente" %>
-                <%= humanize_price(@ticket.charge) %>
+                <%= humanize_price(@ticket.charge_cents) %>
               <% else %>
-                <%= humanize_price(@ticket.update_charge + @vehicle.debt) %>
+                <%= (humanize_price(@ticket.update_charge + @vehicle.debt - @ticket.charge_paid_cents.to_money)) %>
               <% end %>
             </div>
           </div>
@@ -149,7 +168,7 @@
     </button>
   <% end %>
   <div class="bottom-menu-element bottom-menu-center">
-    <% string = "com.fidelier.printfromweb://$intro$$intro$$biguhw$TIQUETE DE PARQUEADERO$intro$$intro$->Id del Tiquete: #{@ticket.id}$intro$->Hora ingreso: #{@ticket.entry}$intro$->Placa Del Vehiculo: #{@ticket.vehicle.plate}$intro$->Zona: #{@ticket.parking_zone.name}$intro$$intro$$intro$$intro$$cut$$intro$" %>
+    <% string = "com.fidelier.printfromweb://$intro$$intro$$biguhw$TIQUETE DE PARQUEADERO$intro$$intro$->Id del Tiquete: #{@ticket.id}$intro$->Hora ingreso: #{@ticket.entry}$intro$->Placa Del Vehiculo: #{@ticket.vehicle.plate}$intro$->Zona: #{@ticket.parking_zone.name}$intro$->Pago Anticipado: #{@ticket.charge_paid_cents}$intro$$intro$$intro$$cut$$intro$" %>
     <a href="<%= string %>" >
       <i class="material-icons">
         print
