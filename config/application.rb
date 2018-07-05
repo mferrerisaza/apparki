@@ -24,5 +24,6 @@ module Apparki
     config.i18n.default_locale = :es
     config.time_zone = 'Bogota'
     config.active_record.default_timezone = :local
+    config.active_job.queue_adapter = :sidekiq
   end
 end
