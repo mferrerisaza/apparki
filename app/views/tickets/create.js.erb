@@ -10,7 +10,9 @@ function printTicket() {
   const plate = document.getElementById("my-text-field").value.toUpperCase();
   const entry = document.getElementById("ticket_entry").value;
   const id = '<%= @ticket.id %>';
-  print.href = `com.fidelier.printfromweb://$intro$$intro$$biguhw$TIQUETE DE PARQUEADERO$intro$$intro$->Id del Tiquete: ${id}$intro$->Hora ingreso: ${entry}$intro$->Placa Del Vehiculo: ${plate}$intro$->Zona: ${zone}$intro$$intro$$intro$$intro$$cut$$intro$`;
+  const charge_paid_cents = '<%= humanize_price @ticket.charge_paid_cents %>';
+
+  print.href = `com.fidelier.printfromweb://$intro$$intro$$biguhw$TIQUETE DE PARQUEADERO$intro$$intro$->Id del Tiquete: ${id}$intro$->Hora ingreso: ${entry}$intro$->Placa Del Vehiculo: ${plate}$intro$->Zona: ${zone}$intro$->Pago Anticipado: <1>charge_paid_cents</1>$intro$$intro$$intro$$intro$$cut$$intro$`;
   print.click();
 }
 
