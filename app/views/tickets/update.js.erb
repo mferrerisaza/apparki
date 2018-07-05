@@ -5,10 +5,18 @@ function printTicket() {
   const entry = '<%= @ticket.entry %>'
   const exit = '<%= @ticket.exit %>'
   const hours = '<%= @ticket.charge/@ticket.parking_zone.price %>'
-  const price = '<%= @ticket.parking_zone.price %>'
-  const charge = '<%= @ticket.charge %>'
+  const price = '<%= humanize_price @ticket.parking_zone.price %>'
+  const charge = '<%= humanize_price @ticket.charge %>'
   const id = '<%= @ticket.id %>'
-  print.href = `com.fidelier.printfromweb://$intro$$intro$$big$RECIBO PARQUEADERO$intro$$intro$->Id del Tiquete: ${id}$intro$->Placa Del Vehiculo: ${plate}$intro$->Hora ingreso: ${entry}$intro$->Hora salida: ${exit}$intro$->Zona: ${zone}$intro$->Horas facturadas: ${hours} x ${price} $intro$$intro$------>TOTAL COBRO: ${charge}$intro$$intro$$intro$$intro$$cut$$intro$`;
+  const debt = '<%= humanize_price @debt %>'
+  const total = '<%= humanize_price @debt + @ticket.charge %>'
+
+  <% if @debt.zero? %>
+    print.href = `com.fidelier.printfromweb://$intro$$intro$$big$RECIBO PARQUEADERO$intro$$intro$->Id del Tiquete: ${id}$intro$->Placa Del Vehiculo: ${plate}$intro$->Hora ingreso: ${entry}$intro$->Hora salida: ${exit}$intro$->Zona: ${zone}$intro$->Horas facturadas: ${hours} x ${price} $intro$$intro$------>TOTAL COBRO: ${charge}$intro$$intro$$intro$$intro$$cut$$intro$`;
+  <% else %>
+    print.href = `com.fidelier.printfromweb://$intro$$intro$$big$RECIBO PARQUEADERO$intro$$intro$->Id del Tiquete: ${id}$intro$->Placa Del Vehiculo: ${plate}$intro$->Hora ingreso: ${entry}$intro$->Hora salida: ${exit}$intro$->Zona: ${zone}$intro$->Horas facturadas: ${hours} x ${price} $intro$->Deuda: ${debt} $intro$$intro$------>TOTAL COBRO: ${total}$intro$$intro$$intro$$intro$$cut$$intro$`;
+  <% end %>
+
   print.click();
 }
 
