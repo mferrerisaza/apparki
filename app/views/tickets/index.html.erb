@@ -24,6 +24,17 @@
     <% end %>
   </div>
 </div>
+
+<% if @reported_tickets.any? %>
+  <h5 class="index-title">Vehículos reportados</h5>
+<% end %>
+<div class="card-container">
+  <div class="row">
+    <% @reported_tickets.each do |ticket| %>
+      <%= render 'shared/cards', ticket: ticket %>
+    <% end %>
+  </div>
+</div>
 <%= button_to new_ticket_path,  class: "mdc-fab material-icons fab-bottom-right fab-color", method: :get do %>
   <i class="material-icons">
     add

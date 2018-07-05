@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180619025321) do
+ActiveRecord::Schema.define(version: 20180704143510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20180619025321) do
     t.string "plate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "debt_cents", default: 0, null: false
   end
 
   add_foreign_key "parking_zones", "users"

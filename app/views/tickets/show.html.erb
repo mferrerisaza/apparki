@@ -8,7 +8,9 @@
 </div>
 
 <div class="card-container">
-  <h5 class="show-title text-center gray-background">Resumen de la factura</h5>
+  <h5 class="show-title text-center gray-background <%= "red-penalty" if @ticket.status == "reportado" %>">
+    <%= @ticket.status != "reportado" ?  "Resumen de la factura:" : "Resumen del reporte:"%>
+  </h5>
   <div class="row">
     <div class="col-xs-12 no-padding">
       <div class="card show-row">
@@ -52,6 +54,7 @@
         </div>
         <div class="show-row-right">
           <%= "#{@ticket.entry.strftime("%x")}  - #{@ticket.entry.strftime("%R")}"%>
+          <%#= @ticket.entry.strftime("%x") %>
         </div>
       </div>
     </div>
@@ -63,11 +66,12 @@
           </i>
         </div>
         <div class="show-row-center">
-          Salida:
+          <%= @ticket.status != "reportado" ?  "Salida:" : "Reporte:"%>
         </div>
         <div class="show-row-right">
           <% if @ticket.exit %>
             <%= "#{(@ticket.exit).strftime("%x")} - #{(@ticket.exit).strftime("%R")}" %>
+            <%#= (@ticket.exit).strftime("%x") %>
           <% end %>
         </div>
       </div>
@@ -83,41 +87,67 @@
           Horas/Fracciones:
         </div>
         <div class="show-row-right">
-          <% if @ticket.exit %>
-            <%= hours_paid(@ticket.entry, @ticket.exit) %>
-          <% end %>
+          <% count = @ticket.update_charge/@ticket.parking_zone.price %>
+          <%= pluralize(count.to_i, "Hora", "Horas") %>
         </div>
       </div>
     </div>
-    <% if @ticket.exit %>
+    <% if @vehicle.debt? && @ticket.status == "pendiente"%>
       <div class="col-xs-12 no-padding">
         <div class="card show-row">
-          <div class="show-total-row">
-            TOTAL:
+          <div class="show-icon">
+          <i class="material-icons">
+            money_off
+          </i>
+          </div>
+          <div class="show-row-center">
+            Deuda:
           </div>
           <div class="show-row-right">
             <div class="show-total-price">
-              <div class="green-box">
+              <div class="green-box red-box">
                 <i class="fas fa-dollar-sign fa-sm"></i>
-                <%= humanize_price(@ticket.charge) %>
+                <%= humanize_price(@vehicle.debt) %>
               </div>
             </div>
           </div>
         </div>
       </div>
     <% end %>
+    <div class="col-xs-12 no-padding">
+      <div class="card show-row">
+        <div class="show-total-row">
+          <%= @ticket.status != "pendiente" ? "TOTAL:" : "SUBTOTAL:"%>
+        </div>
+        <div class="show-row-right">
+          <div class="show-total-price">
+            <div class="green-box <%= "red-box" if @ticket.status == "reportado" %>">
+              <i class="fas fa-dollar-sign fa-sm"></i>
+              <% if @ticket.status != "pendiente" %>
+                <%= humanize_price(@ticket.charge) %>
+              <% else %>
+                <%= humanize_price(@ticket.update_charge + @vehicle.debt) %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="show-bottom-menu <%= "hidden" if @ticket.status == "pagado" %> ">
-  <div class="bottom-menu-element bottom-menu-left">
-    <i class="material-icons">
-      error_outline
-    </i>
-    <div class="bottom-menu-option-text">
-      Reportar
-    </div>
-  </div>
+<div class="show-bottom-menu <%= "hidden" if @ticket.status != "pendiente" %> ">
+  <%= simple_form_for(@vehicle) do |f| %>
+    <%= f.association :tickets, as: :hidden, input_html: { value: @ticket.id }%>
+    <button class="bottom-menu-element bottom-menu-left bottom-menu-btn" type="submit" style="cursor:pointer;">
+      <i class="material-icons">
+        error_outline
+      </i>
+      <div class="bottom-menu-option-text">
+        Reportar
+      </div>
+    </button>
+  <% end %>
   <div class="bottom-menu-element bottom-menu-center">
     <% string = "com.fidelier.printfromweb://$intro$$intro$$biguhw$TIQUETE DE PARQUEADERO$intro$$intro$->Id del Tiquete: #{@ticket.id}$intro$->Hora ingreso: #{@ticket.entry}$intro$->Placa Del Vehiculo: #{@ticket.vehicle.plate}$intro$->Zona: #{@ticket.parking_zone.name}$intro$$intro$$intro$$intro$$cut$$intro$" %>
     <a href="<%= string %>" >
