@@ -25,12 +25,12 @@ module ApplicationHelper
     minutos = minutes_closed(entry, exit)
     horas = hours(minutos)
     minutos_sobrantes = min_sobr(horas)
-    return "#{minutos} minuto repotado" if minutos == 1
-    return "#{minutos} minutos repotados" if minutos < 60
+    return "#{minutos} minuto reportado" if minutos == 1
+    return "#{minutos} minutos reportados" if minutos < 60
     return "#{horas.floor} hora reportada" if horas == 1 && minutos_sobrantes == 0
-    return "#{horas.floor} hora y #{minutos_sobrantes.ceil} minutos repotados" if horas == 1
-    return "#{horas.floor} horas reportadas" if minutos_sobrantes = 0
-    return "#{horas.floor} horas y #{minutos_sobrantes.ceil} minutos repotados"
+    return "#{horas.floor} hora y #{minutos_sobrantes.ceil} minutos reportados" if horas == 1
+    return "#{horas.floor} horas reportadas" if minutos_sobrantes == 0
+    return "#{horas.floor} horas y #{minutos_sobrantes.ceil} minutos reportados"
   end
 
   def money_paid(entry, exit, price)
