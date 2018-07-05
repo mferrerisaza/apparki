@@ -13,4 +13,10 @@ Rails.application.routes.draw do
   get "/report_data", to: "tickets#report_data", as: "report_data"
   get "dashboard", to: "pages#dashboard", as: "dashboard"
   get "arqueo", to: "tickets#arqueo", as: "arqueo"
+
+    # Sidekiq Web UI, only for admins.
+  require "sidekiq/web"
+  authenticate :user, lambda { |u| u.admin } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 end
