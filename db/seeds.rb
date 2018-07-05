@@ -45,6 +45,7 @@ p "Usuario 1 creado"
 u2 = User.new(
   email: "mike@gmail.com",
   password: "123456",
+  admin: true
   )
 p "Usuario 2 creado"
 u2.save!
