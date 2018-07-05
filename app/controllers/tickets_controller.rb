@@ -28,6 +28,7 @@ class TicketsController < ApplicationController
     @ticket = Ticket.new(ticket_params)
     @ticket.charge_paid_cents = Ticket.calc_anticipo(ticket_params).to_money
     @ticket.vehicle = @vehicle unless @vehicle.nil?
+    @ticket.entry_user = current_user
     authorize @ticket
     if @ticket.save
       flash[:alert] = "El vehículo tiene deudas por: #{ helpers.humanized_money @vehicle.debt }" if @vehicle.debt?
@@ -46,6 +47,7 @@ class TicketsController < ApplicationController
   def update
     @ticket = Ticket.find(params[:id])
     @ticket.exit = ticket_params[:exit]
+    @ticket.exit_user = current_user
     @ticket.charge = @ticket.update_charge
     @debt = @ticket.vehicle.debt
     @ticket.vehicle.clean_debt

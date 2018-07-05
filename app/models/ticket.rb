@@ -2,6 +2,8 @@ class Ticket < ApplicationRecord
   STATUS_CHOICES = %w[pagado pendiente reportado]
   belongs_to :parking_zone
   belongs_to :vehicle
+  belongs_to :entry_user, class_name: 'User'
+  belongs_to :exit_user, class_name: 'User', optional: true
 
   monetize :charge_cents
   # monetize :charge_paid_cents
