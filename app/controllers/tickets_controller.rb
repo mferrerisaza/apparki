@@ -29,6 +29,7 @@ class TicketsController < ApplicationController
     @ticket.vehicle = @vehicle unless @vehicle.nil?
     authorize @ticket
     if @ticket.save
+      flash[:alert] = "El vehículo tiene deudas por: #{ helpers.humanized_money @vehicle.debt }" if @vehicle.debt?
       respond_to do |format|
         format.html { redirect_to tickets_path }
         format.js
@@ -45,6 +46,8 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find(params[:id])
     @ticket.exit = ticket_params[:exit]
     @ticket.charge = @ticket.update_charge
+    @debt = @ticket.vehicle.debt
+    @ticket.vehicle.clean_debt
     @ticket.status = "pagado"
     authorize @ticket
     if @ticket.save
