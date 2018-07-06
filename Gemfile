@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.4.4'
 
+gem 'activeadmin'
 gem 'axlsx_rails'
 gem 'axlsx', '= 2.0.1'
 gem 'carrierwave', '~> 1.2'
