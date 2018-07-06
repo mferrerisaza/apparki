@@ -6,6 +6,7 @@ class Ticket < ApplicationRecord
   belongs_to :exit_user, class_name: 'User', optional: true
 
   monetize :charge_cents
+  # monetize :charge_paid_cents
   mount_uploader :picture, PhotoUploader
 
   validates :entry, :status, presence: true
@@ -86,5 +87,10 @@ class Ticket < ApplicationRecord
 
   def self.user_tickets(user)
     Ticket.joins(:parking_zone).where(parking_zones: {user: user}).where(entry: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+  end
+
+  def self.calc_anticipo(params)
+    return ParkingZone.find(params[:parking_zone_id]).price if !params[:charge_paid_cents].nil?
+    0
   end
 end

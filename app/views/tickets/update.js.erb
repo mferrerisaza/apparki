@@ -10,11 +10,12 @@ function printTicket() {
   const id = '<%= @ticket.id %>'
   const debt = '<%= humanize_price @debt %>'
   const total = '<%= humanize_price @debt + @ticket.charge %>'
+  const charge_paid_cents = '<%= humanize_price @ticket.charge_paid_cents %>'
 
   <% if @debt.zero? %>
-    print.href = `com.fidelier.printfromweb://$intro$$intro$$big$RECIBO PARQUEADERO$intro$$intro$->Id del Tiquete: ${id}$intro$->Placa Del Vehiculo: ${plate}$intro$->Hora ingreso: ${entry}$intro$->Hora salida: ${exit}$intro$->Zona: ${zone}$intro$->Horas facturadas: ${hours} x ${price} $intro$$intro$------>TOTAL COBRO: ${charge}$intro$$intro$$intro$$intro$$cut$$intro$`;
+    print.href = `com.fidelier.printfromweb://$intro$$intro$$big$RECIBO PARQUEADERO$intro$$intro$->Id del Tiquete: ${id}$intro$->Placa Del Vehiculo: ${plate}$intro$->Hora ingreso: ${entry}$intro$->Hora salida: ${exit}$intro$->Zona: ${zone}$intro$->Pago Anticipado: ${charge_paid_cents}$intro$->Horas facturadas: ${hours} x ${price} $intro$$intro$------>TOTAL COBRO: ${charge}$intro$$intro$$intro$$intro$$cut$$intro$`;
   <% else %>
-    print.href = `com.fidelier.printfromweb://$intro$$intro$$big$RECIBO PARQUEADERO$intro$$intro$->Id del Tiquete: ${id}$intro$->Placa Del Vehiculo: ${plate}$intro$->Hora ingreso: ${entry}$intro$->Hora salida: ${exit}$intro$->Zona: ${zone}$intro$->Horas facturadas: ${hours} x ${price} $intro$->Deuda: ${debt} $intro$$intro$------>TOTAL COBRO: ${total}$intro$$intro$$intro$$intro$$cut$$intro$`;
+    print.href = `com.fidelier.printfromweb://$intro$$intro$$big$RECIBO PARQUEADERO$intro$$intro$->Id del Tiquete: ${id}$intro$->Placa Del Vehiculo: ${plate}$intro$->Hora ingreso: ${entry}$intro$->Hora salida: ${exit}$intro$->Zona: ${zone}$intro$->Pago Anticipado: ${charge_paid_cents}$intro$->Horas facturadas: ${hours} x ${price} $intro$->Deuda: ${debt} $intro$$intro$------>TOTAL COBRO: ${total}$intro$$intro$$intro$$intro$$cut$$intro$`;
   <% end %>
 
   print.click();
