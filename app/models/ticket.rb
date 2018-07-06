@@ -42,7 +42,8 @@ class Ticket < ApplicationRecord
     unless grace_time >= time_parked
       hours = time_parked - time_parked.floor >= 1 / 60.0 ?  time_parked.ceil : time_parked.floor
     end
-    hours * parking_zone.price
+    return 0.to_money if hours <= 1 && !self.charge_paid_cents.zero?
+    (hours * parking_zone.price) - self.charge_paid_cents.to_money
   end
 
   def self.build_data(args = {})

@@ -8,7 +8,7 @@ class VehiclesController < ApplicationController
     vehicle = Vehicle.find(params[:id])
     ticket = Ticket.find(vehicle_params[:ticket_ids])
     ticket.exit = Time.zone.now
-    amount_debt = ticket.update_charge - ticket.charge_paid_cents.to_money
+    amount_debt = ticket.update_charge
     vehicle.debt += amount_debt
     ticket.charge = amount_debt
     amount_debt.zero? ? ticket.status = "pagado" : ticket.status = "reportado"

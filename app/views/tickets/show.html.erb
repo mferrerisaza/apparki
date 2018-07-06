@@ -145,7 +145,7 @@
               <% if @ticket.status != "pendiente" %>
                 <%= humanize_price(@ticket.charge) %>
               <% else %>
-                <%= humanize_price(@ticket.update_charge + @vehicle.debt - @ticket.charge_paid_cents.to_money) %>
+                <%= humanize_price(@ticket.update_charge + @vehicle.debt) %>
               <% end %>
             </div>
           </div>
