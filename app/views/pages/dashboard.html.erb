@@ -44,7 +44,7 @@
     <div class="col-xs-12 col-md-6">
       <div class="graph-container">
         <h5 class="graph-title"> Ingresos diarios por usuario - semana actual </h5>
-        <%= column_chart User.group(:email).joins(:entry_tickets).group_by_day(:entry, time_zone: "America/Bogota", format: "%a").where(tickets: {entry: @beginning_of_week..@end_of_week}).sum(:charge_cents), xtitle: "Día", ytitle: "Ingresos"%>
+        <%= column_chart User.group(:email).joins(:tickets).group_by_day(:entry, time_zone: "America/Bogota", format: "%a").where(tickets: {entry: @beginning_of_week..@end_of_week}).sum(:charge_cents), xtitle: "Día", ytitle: "Ingresos"%>
       </div>
     </div>
     <div class="col-xs-12 col-md-6">
