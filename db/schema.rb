@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20180705233214) do
     t.integer "charge_cents", default: 0, null: false
     t.bigint "entry_user_id"
     t.bigint "exit_user_id"
+    t.integer "charge_paid_cents", default: 0, null: false
     t.index ["entry_user_id"], name: "index_tickets_on_entry_user_id"
     t.index ["exit_user_id"], name: "index_tickets_on_exit_user_id"
     t.index ["parking_zone_id"], name: "index_tickets_on_parking_zone_id"

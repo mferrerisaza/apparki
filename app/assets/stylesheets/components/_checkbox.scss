@@ -1,0 +1,16 @@
+@import "@material/form-field/mdc-form-field";
+@import "@material/checkbox/mdc-checkbox";
+
+.normal-text-weight {
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.padding-top-10 {
+  padding-top: 10px;
+}
+
+.checkbox-color {
+  @include mdc-checkbox-focus-indicator-color(white);
+  @include mdc-checkbox-container-colors(gray, white, $brand-primary)
+}
