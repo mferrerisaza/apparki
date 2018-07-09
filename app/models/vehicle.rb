@@ -18,4 +18,8 @@ class Vehicle < ApplicationRecord
     tickets.each { |ticket| ticket.update(status: "pagado") }
     self.update(debt: 0)
   end
+
+  def name
+    "#{id} - #{plate}"
+  end
 end
