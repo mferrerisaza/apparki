@@ -1,13 +1,17 @@
 <%= simple_form_for(@ticket, remote: true) do |f| %>
   <%= f.error_notification %>
-  <%= f.input :entry, as: :hidden, input_html: { value: Time.zone.now }%>
-  <div class="col-xs-12 col-margin">
-    <div class="mdc-text-field ticket-plate <%= "invalid-vehicle-plate" unless @ticket.errors.messages[:vehicle].empty? %>">
-      <input
-        type="text"
-        id="my-text-field"
-        name="vehicle[plate]"
-        class="mdc-text-field__input"
+  <% if  Time.zone.now  <= Time.zone.now.change(hour: 7) %>
+    <%= f.input :entry, as: :hidden, input_html: { value: Time.zone.now.change(hour: 7) }%>
+  <% else %>
+    <%= f.input :entry, as: :hidden, input_html: { value: Time.zone.now }%>
+  <% end %>
+    <div class="col-xs-12 col-margin">
+      <div class="mdc-text-field ticket-plate <%= "invalid-vehicle-plate" unless @ticket.errors.messages[:vehicle].empty? %>">
+        <input
+          type="text"
+          id="my-text-field"
+          name="vehicle[plate]"
+          class="mdc-text-field__input"
         maxlength="6"
         value = <%= @ticket.vehicle.plate unless @ticket.vehicle.blank? %>>
       <label class="mdc-floating-label" for="my-text-field">Placa del vehículo</label>
