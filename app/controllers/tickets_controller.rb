@@ -49,7 +49,11 @@ class TicketsController < ApplicationController
     @ticket.exit = ticket_params[:exit]
     @ticket.exit_user = current_user
     @ticket.charge = @ticket.update_charge
-    @debt = @ticket.vehicle.debt
+    if @ticket.status == "reportado"
+      @debt = 0
+    else
+      @debt = @ticket.vehicle.debt
+    end
     @ticket.vehicle.clean_debt
     @ticket.status = "pagado"
     authorize @ticket
