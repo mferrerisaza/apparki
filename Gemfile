@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 ruby '2.4.4'
 
 gem 'activeadmin'
+gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
 gem 'axlsx_rails'
-gem 'axlsx', '= 2.0.1'
 gem 'carrierwave', '~> 1.2'
 gem 'cloudinary'
 gem "chartkick"
@@ -15,18 +15,19 @@ gem 'pg', '~> 0.21'
 gem 'puma'
 gem 'rails', '5.1.6'
 gem 'redis'
-gem 'rubyzip', '= 1.0.0'
 gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass', '~> 3.3'
 gem 'font-awesome-sass', '~> 5.0.9'
+gem 'rubyzip', '>= 1.2.1'
 gem 'sass-rails'
 gem 'simple_form'
 gem "pundit"
 gem 'uglifier'
 gem 'webpacker'
 gem 'money-rails'
+
 
 group :development do
   gem 'web-console', '>= 3.3.0'
