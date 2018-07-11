@@ -1,7 +1,12 @@
 class VehiclesController < ApplicationController
+  before_action :set_vehicle, only: :show
 
   def index
     @vehicles = policy_scope(Vehicle)
+  end
+
+  def show
+    authorize @vehicle
   end
 
   def update
@@ -29,6 +34,15 @@ class VehiclesController < ApplicationController
 
   def vehicle_params
     params.require(:vehicle).permit(:ticket_ids)
+  end
+
+  def set_vehicle
+    @vehicle = Vehicle.find(params[:id])
+    @tickets = Ticket.where(nil)
+    @tickets = @tickets.where(vehicle: @vehicle)
+    @open_tickets = @tickets.where(status: "pendiente").order(entry: :asc)
+    @close_tickets = @tickets.where(status: "pagado").order(created_at: :desc)
+    @reported_tickets = @tickets.where(status: "reportado").order(created_at: :desc)
   end
 
 end
