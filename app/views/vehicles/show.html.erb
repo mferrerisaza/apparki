@@ -1,0 +1,40 @@
+<h3>Tiquetes del vehículo <%= @vehicle.plate %></h1>
+<% if @tickets.empty? %>
+  <h5 class="index-title">No se han encontrado vehículos para tu busqueda</h5>
+<% end %>
+
+<% if @open_tickets.any? %>
+  <h5 class="index-title">Tiquetes activos</h5>
+<% end %>
+
+<div class="card-container">
+  <div class="row">
+    <% @open_tickets.each do |ticket|  %>
+      <%= render 'shared/cards', ticket: ticket %>
+    <% end %>
+  </div>
+</div>
+
+<% if @close_tickets.any? %>
+  <h5 class="index-title">Tiquetes pagados</h5>
+<% end %>
+<div class="card-container">
+  <div class="row">
+    <% @close_tickets.each do |ticket| %>
+      <%= render 'shared/cards', ticket: ticket %>
+    <% end %>
+  </div>
+</div>
+
+<% if @reported_tickets.any? %>
+  <h5 class="index-title">Tiquetes reportados</h5>
+<% end %>
+<div class="card-container">
+  <div class="row">
+    <% @reported_tickets.each do |ticket| %>
+      <%= render 'shared/cards', ticket: ticket %>
+    <% end %>
+  </div>
+</div>
+
+

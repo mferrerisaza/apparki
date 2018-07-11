@@ -8,7 +8,7 @@ function printTicket() {
   const zoneSelect = document.getElementById("ticket_parking_zone_id");
   const zone = zoneSelect.options[zoneSelect.selectedIndex].text;
   const plate = document.getElementById("my-text-field").value.toUpperCase();
-  const entry = document.getElementById("ticket_entry").value;
+  const entry = '<%= "#{@ticket.entry.strftime("%x")}-#{@ticket.entry.strftime("%R")}"%>' //document.getElementById("ticket_entry").value;
   const id = '<%= @ticket.id %>';
   const charge_paid_cents = '<%= humanize_price @ticket.charge_paid_cents %>';
 
