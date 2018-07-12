@@ -207,7 +207,7 @@
     <% end %>
 </div>
 
-<div class="<%= "hidden" if @ticket.status != "reportado" %> ">
+<div class="<%= "hidden" unless @ticket.status == "reportado" %> ">
   <%= simple_form_for(@ticket, remote: true) do |f| %>
     <%= f.input :exit, as: :hidden, input_html: { value: @ticket.exit }%>
     <button class="mdc-fab material-icons fab-bottom-right fab-color" type="submit" style="cursor:pointer;">
@@ -216,4 +216,13 @@
       </i>
     </button>
   <% end %>
+</div>
+
+<div class="<%= "hidden" unless @ticket.status == "pagado" %> ">
+  <% string = "" %> <!-- TODO: Poner acá el link del recibo probando con la maquina -->
+  <a class="mdc-fab material-icons fab-bottom-right fab-color" style="cursor:pointer;" href="<%= string %>">
+    <i class="material-icons">
+      print
+    </i>
+  </a>
 </div>
