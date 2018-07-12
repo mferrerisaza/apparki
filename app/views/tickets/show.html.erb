@@ -23,7 +23,14 @@
           Placa del vehículo:
         </div>
         <div class="show-row-right">
-          <%= @ticket.vehicle.plate %>
+          <%= link_to vehicle_path(@vehicle) do%>
+            <div class="vehicle-link-content">
+              <%= @ticket.vehicle.plate %>
+              <i class="material-icons">
+                description
+              </i>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
