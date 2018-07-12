@@ -73,8 +73,8 @@ module ApplicationHelper
     end
   end
 
-  def subtotal_day(tickets)
-    humanize_price((tickets.sum(:charge_cents)/100) + tickets.sum(:charge_paid_cents))
+  def subtotal_day(entry_tickets, exit_tickets)
+    humanize_price((exit_tickets.sum(:charge_cents)/100) + entry_tickets.sum(:charge_paid_cents))
   end
 
   def count_day_tickets(tickets)
