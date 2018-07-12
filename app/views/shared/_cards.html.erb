@@ -21,14 +21,17 @@
           <div class="mdc-menu material-menu-container">
             <ul class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
               <li class="mdc-list-item" role="menuitem" tabindex="0">
-                <button class="menu-charge-btn" style="cursor:pointer;">
-                 <i class="material-icons">
-                   error_outline
-                 </i>
-                  <div class="bottom-menu-option-text">
-                    Reportar
-                  </div>
-                </button>
+                <%= simple_form_for(ticket.vehicle) do |f| %>
+                  <%= f.association :tickets, as: :hidden, input_html: { value: ticket.id }%>
+                  <button class="menu-charge-btn" type="submit" style="cursor:pointer;" data-confirm="Estás seguro que deseas reportar el vehiculo <%= ticket.vehicle.plate %>">
+                    <i class="material-icons">
+                      error_outline
+                    </i>
+                    <div class="bottom-menu-option-text">
+                      Reportar
+                    </div>
+                  </button>
+                <% end %>
               </li>
               <li class="mdc-list-item" role="menuitem" tabindex="0">
                 <% string = "com.fidelier.printfromweb://$intro$$intro$$biguhw$TIQUETE DE PARQUEADERO$intro$$intro$->Id del Tiquete: #{ticket.id}$intro$->Hora ingreso: #{ticket.entry.strftime("%x")}-#{ticket.entry.strftime("%R")}$intro$->Placa Del Vehiculo: #{ticket.vehicle.plate}$intro$->Zona: #{ticket.parking_zone.name}$intro$->Pago Anticipado: #{ticket.charge_paid_cents}$intro$$intro$$intro$$intro$$cut$$intro$" %>
@@ -42,17 +45,13 @@
                 </a>
               </li>
               <li class="mdc-list-item" role="menuitem" tabindex="0">
-                <%= simple_form_for(ticket, remote: true) do |f| %>
-                  <%= f.input :exit, as: :hidden, input_html: { value: Time.zone.now }%>
-                  <button class="menu-charge-btn"type="submit" style="cursor:pointer;">
-                    <a href="#" id="linkImpresora" class="hidden"></a>
-                    <i class="material-icons">
-                      attach_money
-                    </i>
-                    <div class="bottom-menu-option-text">
-                      Generar cobro
-                    </div>
-                  </button>
+                <%= link_to vehicle_path(ticket.vehicle),  class: "menu-charge-btn link-to-btn-style" do %>
+                  <i class="material-icons">
+                    description
+                  </i>
+                  <div class="bottom-menu-option-text">
+                    Historial
+                  </div>
                 <% end %>
               </li>
             </ul>
