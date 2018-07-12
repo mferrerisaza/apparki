@@ -49,8 +49,8 @@ class VehiclesController < ApplicationController
     @tickets = Ticket.where(nil)
     @tickets = @tickets.where(vehicle: @vehicle)
     @open_tickets = @tickets.where(status: "pendiente").order(entry: :asc)
-    @close_tickets = @tickets.where(status: "pagado").order(created_at: :desc)
-    @reported_tickets = @tickets.where(status: "reportado").order(created_at: :desc)
+    @close_tickets = @tickets.where(status: "pagado").order(exit: :desc)
+    @reported_tickets = @tickets.where(status: "reportado").order(exit: :desc)
   end
 
 end
