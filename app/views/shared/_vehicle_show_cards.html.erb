@@ -1,0 +1,76 @@
+<div class="col-xs-12 no-padding" >
+  <div class="card">
+    <% unless ticket.exit? %>
+      <%= link_to ticket_path(ticket), class: "card-link card-linkeable" do %>
+        <div class="card-car-icon">
+          <i class="material-icons car-size-big">
+            directions_car
+          </i>
+        </div>
+        <div class="card-car-central">
+          <div class="card-car-central-main">
+            <%= ticket.vehicle.plate.upcase %>
+          </div>
+          <div class="card-car-central-sec">
+            <%= "Registrado hace " + distance_of_time_in_words_to_now(ticket.entry, include_seconds: true) %>
+          </div>
+        </div>
+      <% end %>
+      <div class="card-car-right">
+        <div class="mdc-menu material-menu-container">
+          <ul class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
+            <li class="mdc-list-item" role="menuitem" tabindex="0">
+              <%= simple_form_for(ticket.vehicle) do |f| %>
+                <%= f.association :tickets, as: :hidden, input_html: { value: ticket.id }%>
+                <button class="menu-charge-btn" type="submit" style="cursor:pointer;" data-confirm="Estás seguro que deseas reportar el vehiculo <%= ticket.vehicle.plate %>">
+                  <i class="material-icons">
+                    error_outline
+                  </i>
+                  <div class="bottom-menu-option-text">
+                    Reportar
+                  </div>
+                </button>
+              <% end %>
+            </li>
+            <li class="mdc-list-item" role="menuitem" tabindex="0">
+              <% string = "com.fidelier.printfromweb://$intro$$intro$$biguhw$TIQUETE DE PARQUEADERO$intro$$intro$->Id del Tiquete: #{ticket.id}$intro$->Hora ingreso: #{ticket.entry.strftime("%x")}-#{ticket.entry.strftime("%R")}$intro$->Placa Del Vehiculo: #{ticket.vehicle.plate}$intro$->Zona: #{ticket.parking_zone.name}$intro$->Pago Anticipado: #{ticket.charge_paid_cents}$intro$$intro$$intro$$intro$$cut$$intro$" %>
+              <a href="<%= string %>" class="menu-charge-btn link-to-btn-style" style="cursor:pointer;">
+                <i class="material-icons">
+                  print
+                </i>
+                <div class="bottom-menu-option-text">
+                  Imprimir
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <i class="fas fa-ellipsis-v menu-button" ></i>
+      </div>
+    <% else %>
+      <%= link_to ticket_path(ticket), class: "card-link card-linkeable" do %>
+        <div class="card-car-icon">
+          <i class="material-icons car-size-big">
+            directions_car
+          </i>
+        </div>
+        <div class="card-car-central">
+          <div class="card-car-central-main">
+            <%= ticket.vehicle.plate.upcase %>
+          </div>
+          <div class="card-car-central-sec">
+            <% if ticket.status == "pagado" %>
+              <%= "Pagado hace " + distance_of_time_in_words_to_now(ticket.exit, include_seconds: true) %>
+            <% else %>
+              <%= "Reportado hace " + distance_of_time_in_words_to_now(ticket.exit, include_seconds: true) %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+        <div class="card-car-right">
+          <i class="fas fa-dollar-sign fa-sm"></i>
+          <%= humanized_money(ticket.charge) %>
+        </div>
+    <% end %>
+  </div>
+</div>
