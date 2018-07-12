@@ -36,6 +36,24 @@
   padding-right: 2%;
   flex: 0 0 50%;
   text-align: right;
+  a {
+    float: right;
+    text-decoration: none;
+    .vehicle-link-content {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      border: 1px solid;
+      border-radius: 24px;
+      padding: 8px;
+    }
+    &:focus, :active {
+      text-decoration: none;
+    }
+    i {
+        padding-left: 8px;
+    }
+  }
 }
 
 .show-bottom-menu {
@@ -105,4 +123,16 @@
 
 .show-total-price {
   text-align: -webkit-right;
+}
+.vehicle-show-title{
+  font-size: 24px;
+  font-weight: bold;
+  padding: 16px;
+  text-align: center;
+  color: rgba(0,0,0,0.8);
+  margin: 16px 0px;
+}
+.vehicle-show-separator {
+  margin: 0px 80px;
+  border-top: 0.5px solid rgba(0, 0, 0, 0.3);
 }
