@@ -23,7 +23,14 @@
           Placa del vehículo:
         </div>
         <div class="show-row-right">
-          <%= @ticket.vehicle.plate %>
+          <%= link_to vehicle_path(@vehicle) do%>
+            <div class="vehicle-link-content">
+              <%= @ticket.vehicle.plate %>
+              <i class="material-icons">
+                description
+              </i>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
@@ -198,4 +205,24 @@
         </div>
       </button>
     <% end %>
+</div>
+
+<div class="<%= "hidden" unless @ticket.status == "reportado" %> ">
+  <%= simple_form_for(@ticket, remote: true) do |f| %>
+    <%= f.input :exit, as: :hidden, input_html: { value: @ticket.exit }%>
+    <button class="mdc-fab material-icons fab-bottom-right fab-color" type="submit" style="cursor:pointer;">
+      <i class="material-icons">
+        attach_money
+      </i>
+    </button>
+  <% end %>
+</div>
+
+<div class="<%= "hidden" unless @ticket.status == "pagado" %> ">
+  <% string = "" %> <!-- TODO: Poner acá el link del recibo probando con la maquina -->
+  <a class="mdc-fab material-icons fab-bottom-right fab-color" style="cursor:pointer;" href="<%= string %>">
+    <i class="material-icons">
+      print
+    </i>
+  </a>
 </div>

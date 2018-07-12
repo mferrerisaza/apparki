@@ -1,4 +1,5 @@
-<h3>Tiquetes del vehículo <%= @vehicle.plate %></h1>
+<h1 class="vehicle-show-title">Historial del vehículo <%= @vehicle.plate %></h1>
+<hr class="vehicle-show-separator" >
 <% if @tickets.empty? %>
   <h5 class="index-title">No se han encontrado vehículos para tu busqueda</h5>
 <% end %>
@@ -10,7 +11,7 @@
 <div class="card-container">
   <div class="row">
     <% @open_tickets.each do |ticket|  %>
-      <%= render 'shared/cards', ticket: ticket %>
+      <%= render 'shared/vehicle_show_cards', ticket: ticket %>
     <% end %>
   </div>
 </div>
@@ -21,7 +22,7 @@
 <div class="card-container">
   <div class="row">
     <% @close_tickets.each do |ticket| %>
-      <%= render 'shared/cards', ticket: ticket %>
+      <%= render 'shared/vehicle_show_cards', ticket: ticket %>
     <% end %>
   </div>
 </div>
@@ -32,7 +33,7 @@
 <div class="card-container">
   <div class="row">
     <% @reported_tickets.each do |ticket| %>
-      <%= render 'shared/cards', ticket: ticket %>
+      <%= render 'shared/vehicle_show_cards', ticket: ticket %>
     <% end %>
   </div>
 </div>
