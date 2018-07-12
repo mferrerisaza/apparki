@@ -2,7 +2,7 @@
   <div class="navbar-wagon-item">
 
       <% if params[:plate].present? || action_name == "show" || action_name == "new" || action_name == "arqueo"    %>
-        <%= link_to tickets_path do %>
+        <%= link_to :back do %>
           <i class="material-icons navbar-wagon-icon">
             arrow_back
           </i>
@@ -41,7 +41,7 @@
       <h4>Apparki</h4>
     <% end %>
   </div>
-  <% if controller_name == "tickets" && (action_name == "show" || action_name == "new") || action_name == "arqueo" %>
+  <% if controller_name == "tickets" && (action_name == "show" || action_name == "new") || action_name == "arqueo" || controller_name %>
     <div class="navbar-wagon-item item-hidden">
   <% else %>
     <div class="navbar-wagon-item">
