@@ -176,7 +176,7 @@
     </button>
   <% end %>
   <div class="bottom-menu-element bottom-menu-center">
-    <% string = "com.fidelier.printfromweb://$intro$$intro$$biguhw$TIQUETE DE PARQUEADERO$intro$$intro$->Id del Tiquete: #{@ticket.id}$intro$->Hora ingreso: #{@ticket.entry}$intro$->Placa Del Vehiculo: #{@ticket.vehicle.plate}$intro$->Zona: #{@ticket.parking_zone.name}$intro$->Pago Anticipado: #{@ticket.charge_paid_cents}$intro$$intro$$intro$$cut$$intro$" %>
+    <% string = "com.fidelier.printfromweb://$intro$$intro$$biguhw$TIQUETE DE PARQUEADERO$intro$$intro$->Id del Tiquete: #{@ticket.id}$intro$->Hora ingreso: #{@ticket.entry.strftime("%x")}-#{@ticket.entry.strftime("%R")}$intro$->Placa Del Vehiculo: #{@ticket.vehicle.plate}$intro$->Zona: #{@ticket.parking_zone.name}$intro$->Pago Anticipado: #{@ticket.charge_paid_cents}$intro$$intro$$intro$$cut$$intro$" %>
     <a href="<%= string %>" >
       <i class="material-icons">
         print

@@ -2,8 +2,8 @@ function printTicket() {
   const print = document.getElementById("linkImpresora");
   const zone = '<%= @ticket.parking_zone.name %>'
   const plate = '<%= @ticket.vehicle.plate %>'
-  const entry = '<%= @ticket.entry %>'
-  const exit = '<%= @ticket.exit %>'
+  const entry = '<%= "#{@ticket.entry.strftime("%x")}-#{@ticket.entry.strftime("%R")}"%>'
+  const exit = '<%= "#{@ticket.exit.strftime("%x")}-#{@ticket.exit.strftime("%R")}"%>'
   const hours = '<%= @ticket.charge/@ticket.parking_zone.price %>'
   const price = '<%= humanize_price @ticket.parking_zone.price %>'
   const charge = '<%= humanize_price @ticket.charge %>'
