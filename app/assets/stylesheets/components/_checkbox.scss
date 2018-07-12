@@ -8,9 +8,13 @@
 
 .padding-top-10 {
   padding-top: 10px;
+  margin-left: -11px;
 }
 
 .checkbox-color {
   @include mdc-checkbox-focus-indicator-color(white);
   @include mdc-checkbox-container-colors(gray, white, $brand-primary)
+}
+.mdc-form-field > label {
+  margin: 0px;
 }
