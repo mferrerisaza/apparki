@@ -16,6 +16,7 @@ class VehiclesController < ApplicationController
       ticket.exit_user = current_user
     else
       ticket.status = "reportado"
+      ticket.exit_user = current_user
     end
     authorize vehicle
     if amount_debt.zero? && ticket.charge_paid_cents > 0 &&  ticket.save
