@@ -16,9 +16,17 @@ class VehiclesController < ApplicationController
     amount_debt = ticket.update_charge
     vehicle.debt += amount_debt
     ticket.charge = amount_debt
-    amount_debt.zero? ? ticket.status = "pagado" : ticket.status = "reportado"
+    if amount_debt.zero?
+      ticket.status = "pagado"
+      ticket.exit_user = current_user
+    else
+      ticket.status = "reportado"
+    end
     authorize vehicle
-    if amount_debt.zero? && ticket.save
+    if amount_debt.zero? && ticket.charge_paid_cents > 0 &&  ticket.save
+      flash[:notice] = "El vehículo ya ha pagado el periodo a cobrar"
+      redirect_to ticket_path(ticket)
+    elsif amount_debt.zero? && ticket.save
       flash[:notice] = "El vehículo no ha superado el límite de tiempo gratis"
       redirect_to ticket_path(ticket)
     elsif vehicle.save && ticket.save

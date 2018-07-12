@@ -13,9 +13,9 @@ class Vehicle < ApplicationRecord
     !debt.zero?
   end
 
-  def clean_debt
+  def clean_debt(current_user)
     tickets =  Ticket.where(vehicle: self).where(status: "reportado")
-    tickets.each { |ticket| ticket.update(status: "pagado") }
+    tickets.each { |ticket| ticket.update(status: "pagado", exit_user: current_user) }
     self.update(debt: 0)
   end
 

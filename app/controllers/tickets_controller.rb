@@ -54,7 +54,7 @@ class TicketsController < ApplicationController
     else
       @debt = @ticket.vehicle.debt
     end
-    @ticket.vehicle.clean_debt
+    @ticket.vehicle.clean_debt(current_user)
     @ticket.status = "pagado"
     authorize @ticket
     if @ticket.save

@@ -85,7 +85,7 @@
           Horas/Fracciones:
         </div>
         <div class="show-row-right">
-          <% count = @ticket.update_charge/@ticket.parking_zone.price %>
+          <% count = (@ticket.update_charge + @ticket.charge_paid_cents.to_money)/@ticket.parking_zone.price %>
           <%= pluralize(count.to_i, "Hora", "Horas") %>
         </div>
       </div>
@@ -136,14 +136,22 @@
     <div class="col-xs-12 no-padding">
       <div class="card show-row">
         <div class="show-total-row">
-          <%= @ticket.status != "pendiente" ? "TOTAL:" : "SUBTOTAL:"%>
+          <% if @ticket.status == "pendiente" %>
+            SUBTOTAL:
+          <% elsif @ticket.status == "reportado" %>
+            TOTAL DEUDA:
+          <% else %>
+            TOTAL:
+          <% end %>
         </div>
         <div class="show-row-right">
           <div class="show-total-price">
             <div class="green-box <%= "red-box" if @ticket.status == "reportado" %>">
               <i class="fas fa-dollar-sign fa-sm"></i>
-              <% if @ticket.status != "pendiente" %>
-                <%= humanize_price(@ticket.charge) %>
+              <% if @ticket.status == "pagado" %>
+                <%= humanize_price(@ticket.charge + @ticket.charge_paid_cents.to_money)  %>
+              <% elsif @ticket.status == "reportado" %>
+                <%= humanize_price(@ticket.charge)  %>
               <% else %>
                 <%= humanize_price(@ticket.update_charge + @vehicle.debt) %>
               <% end %>
@@ -168,7 +176,7 @@
     </button>
   <% end %>
   <div class="bottom-menu-element bottom-menu-center">
-    <% string = "com.fidelier.printfromweb://$intro$$intro$$biguhw$TIQUETE DE PARQUEADERO$intro$$intro$->Id del Tiquete: #{@ticket.id}$intro$->Hora ingreso: #{@ticket.entry}$intro$->Placa Del Vehiculo: #{@ticket.vehicle.plate}$intro$->Zona: #{@ticket.parking_zone.name}$intro$->Pago Anticipado: #{@ticket.charge_paid_cents}$intro$$intro$$intro$$cut$$intro$" %>
+    <% string = "com.fidelier.printfromweb://$intro$$intro$$biguhw$TIQUETE DE PARQUEADERO$intro$$intro$->Id del Tiquete: #{@ticket.id}$intro$->Hora ingreso: #{@ticket.entry.strftime("%x")}-#{@ticket.entry.strftime("%R")}$intro$->Placa Del Vehiculo: #{@ticket.vehicle.plate}$intro$->Zona: #{@ticket.parking_zone.name}$intro$->Pago Anticipado: #{@ticket.charge_paid_cents}$intro$$intro$$intro$$cut$$intro$" %>
     <a href="<%= string %>" >
       <i class="material-icons">
         print
