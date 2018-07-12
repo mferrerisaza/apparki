@@ -86,8 +86,16 @@ class Ticket < ApplicationRecord
     group_tickets = Ticket.where(entry: beg..endd)
   end
 
-  def self.user_tickets(user)
-    Ticket.joins(:parking_zone).where(parking_zones: {user: user}).where(entry: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+  def self.entry_tickets(user)
+    Ticket.where(entry_user: user).where(entry: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+  end
+
+  def self.exit_tickets(user)
+    Ticket.where(exit_user: user).where(entry: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+  end
+
+  def self.zone_tickets(user)
+    Ticket.joins(:parking_zone).where(parking_zones: {user: user})
   end
 
   def self.calc_anticipo(params)
