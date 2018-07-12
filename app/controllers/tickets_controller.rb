@@ -50,7 +50,7 @@ class TicketsController < ApplicationController
     @ticket.exit_user = current_user
     @ticket.charge = @ticket.update_charge
     @debt = @ticket.vehicle.debt
-    @ticket.vehicle.clean_debt
+    @ticket.vehicle.clean_debt(current_user)
     @ticket.status = "pagado"
     authorize @ticket
     if @ticket.save
