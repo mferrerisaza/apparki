@@ -11,12 +11,14 @@ Rails.application.routes.draw do
   end
   resources :vehicles, only: [:index, :show, :update]
   resources :tickets, except: [:delete]
-  get "/report_data", to: "tickets#report_data", as: "report_data"
-  get "dashboard", to: "pages#dashboard", as: "dashboard"
-  get "arqueo", to: "tickets#arqueo", as: "arqueo"
+  resources :parking_zones, only: [:index, :show]
+  get '/report_data', to: 'tickets#report_data', as: 'report_data'
+  get 'dashboard', to: 'pages#dashboard', as: 'dashboard'
+  get 'arqueo', to: 'tickets#arqueo', as: 'arqueo'
+  get 'landing', to: 'parking_zones#landing', as: 'landing'
 
-    # Sidekiq Web UI, only for admins.
-  require "sidekiq/web"
+  # Sidekiq Web UI, only for admins.
+  require 'sidekiq/web'
   authenticate :user, lambda { |u| u.admin } do
     mount Sidekiq::Web => '/sidekiq'
   end
