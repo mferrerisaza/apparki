@@ -1,0 +1,26 @@
+<div class="col-xs-12 no-padding" >
+  <div class="card">
+    <%= link_to parking_zone_path(pk), class: "card-link card-linkeable" do %>
+      <div class="card-car-icon">
+        <i class="material-icons car-size-big">
+          local_parking
+        </i>
+      </div>
+      <div class="card-car-central flex-item-65 bottom-space-small">
+        <div class="card-car-central-main">
+          <%= pk.name %>
+        </div>
+        <div class="card-car-central-sec color-gray">
+          A 500 metros del parque
+        </div>
+        <div class="card-car-central-sec color-gray">
+          Disponibilidad: alta
+        </div>
+      </div>
+      <div class="card-car-right">
+        <i class="fas fa-dollar-sign fa-sm"></i>
+        <%= humanize_price(pk.price) %>
+      </div>
+    <% end %>
+  </div>
+</div>
