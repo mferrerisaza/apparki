@@ -1,10 +1,13 @@
 .new_ticket{
-  label{
-   font-size: 13px;
+  label, input, option, select{
+   font-size: 14px;
+  }
+  input[type="submit"] {
+    font-size: 13px;
   }
 }
 .col-margin {
-  margin-top: 8px;
+  margin-top: 24px;
 }
 .button-margin {
   font-size: 12px;
