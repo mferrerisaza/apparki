@@ -1,0 +1,11 @@
+<div class="banner">
+  <div class="banner-content">
+    <h1>Apparki</h1>
+    <h3 class="margin-center">Encuentra un lugar para estacionar</h3>
+    <h4>¿Cuál es tu vehículo?</h4>
+    <div class="option-buttons flex flex-align-center flex-space-around">
+      <%= link_to "Carro", parking_zones_path(vehicle_type: "car" ), class: "mdc-button mdc-button--raised button-margin btn-width-medium" %>
+      <%= link_to "Moto", parking_zones_path(vehicle_type: "bike" ), class: "mdc-button mdc-button--raised button-margin btn-width-medium" %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<div class="card-container">
+  <div class="row">
+    <% @parking_zones.each do |pk| %>
+      <%= render 'shared/parking_zone_cards', pk: pk %>
+    <% end %>
+  </div>
+</div>
