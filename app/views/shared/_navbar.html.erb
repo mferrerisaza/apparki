@@ -1,54 +1,56 @@
-<div class="navbar-wagon">
-  <div class="navbar-wagon-item">
+<% unless (controller_name == "parking_zones" && action_name == "landing") %>
+  <div class="navbar-wagon">
+    <div class="navbar-wagon-item">
 
-      <% if params[:plate].present? || action_name == "show" || action_name == "new" || action_name == "arqueo"    %>
-        <%= link_to :back do %>
-          <i class="material-icons navbar-wagon-icon">
-            arrow_back
-          </i>
-        <% end %>
-      <% else %>
-        <i class="material-icons navbar-wagon-dropicon">
-          menu
-        </i>
-      <% end %>
-      <div id="mySidenav" class="sidenav">
-        <div class="sidenav-header">
-          <h4>Apparki</h4>
-        </div>
-        <% if user_signed_in? %>
-          <a class="closebtn">&times;</a>
-          <%= link_to tickets_path do %>
-            <i class="fas fa-home"></i> Inicio
-          <% end %>
-          <%= link_to new_ticket_path do %>
-            <i class="fas fa-plus-circle"></i> Crear ticket
-          <% end %>
-          <%= link_to arqueo_path do %>
-            <i class="fas fa-hand-holding-usd"></i> Cuentas
-          <% end %>
-          <%= link_to destroy_user_session_path, method: :delete do %>
-            <i class="fas fa-sign-out-alt"></i>  <%= t(".sign_out", default: "Log out") %>
+        <% if params[:plate].present? || action_name == "show" || action_name == "new" || action_name == "arqueo" || controller_name == "parking_zones" %>
+          <%= link_to :back do %>
+            <i class="material-icons navbar-wagon-icon">
+              arrow_back
+            </i>
           <% end %>
         <% else %>
-          <a class="closebtn">&times;</a>
-          <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
+          <i class="material-icons navbar-wagon-dropicon">
+            menu
+          </i>
         <% end %>
-      </div>
-  </div>
-  <div class="navbar-wagon-item">
-    <%= link_to current_user.blank? ? unauthenticated_root_path : authenticated_root_path, class: "navbar-wagon-brand" do %>
-      <h4>Apparki</h4>
-    <% end %>
-  </div>
-  <% if controller_name == "tickets" && (action_name == "show" || action_name == "new") || action_name == "arqueo" || controller_name %>
-    <div class="navbar-wagon-item item-hidden">
-  <% else %>
+        <div id="mySidenav" class="sidenav">
+          <div class="sidenav-header">
+            <h4>Apparki</h4>
+          </div>
+          <% if user_signed_in? %>
+            <a class="closebtn">&times;</a>
+            <%= link_to tickets_path do %>
+              <i class="fas fa-home"></i> Inicio
+            <% end %>
+            <%= link_to new_ticket_path do %>
+              <i class="fas fa-plus-circle"></i> Crear ticket
+            <% end %>
+            <%= link_to arqueo_path do %>
+              <i class="fas fa-hand-holding-usd"></i> Cuentas
+            <% end %>
+            <%= link_to destroy_user_session_path, method: :delete do %>
+              <i class="fas fa-sign-out-alt"></i>  <%= t(".sign_out", default: "Log out") %>
+            <% end %>
+          <% else %>
+            <a class="closebtn">&times;</a>
+            <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
+          <% end %>
+        </div>
+    </div>
     <div class="navbar-wagon-item">
-  <% end %>
-    <i class="material-icons navbar-wagon-icon" data-toggle="modal" data-target="#myModal">
-      search
-    </i>
+      <%= link_to current_user.blank? ? unauthenticated_root_path : authenticated_root_path, class: "navbar-wagon-brand" do %>
+        <h4>Apparki</h4>
+      <% end %>
+    </div>
+    <% if controller_name == "tickets" && (action_name == "show" || action_name == "new") || action_name == "arqueo" || controller_name %>
+      <div class="navbar-wagon-item item-hidden">
+    <% else %>
+      <div class="navbar-wagon-item">
+    <% end %>
+      <i class="material-icons navbar-wagon-icon" data-toggle="modal" data-target="#myModal">
+        search
+      </i>
+    </div>
   </div>
-</div>
-<%= render 'shared/search-plate-modal' %>
+  <%= render 'shared/search-plate-modal' %>
+<% end %>
