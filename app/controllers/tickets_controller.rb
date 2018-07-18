@@ -84,7 +84,7 @@ class TicketsController < ApplicationController
   private
 
   def set_parking_zones
-    @parking_zones = ParkingZone.where(user: current_user)
+    @parking_zones = ParkingZone.all # where(user: current_user)
   end
 
   def ticket_params

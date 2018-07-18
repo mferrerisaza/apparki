@@ -21,4 +21,5 @@ function addPictureListener(){
 
 document.addEventListener("DOMContentLoaded", () => {
   addPictureListener();
+  window.setInterval(addPictureListener, 1000);
 })

@@ -14,6 +14,7 @@ class Ticket < ApplicationRecord
   validate :vehicle_tickets, on: :create
 
   def vehicle_tickets
+    return if vehicle_id.nil?
     if Ticket.where(status: "pendiente").where(vehicle_id: self.vehicle.id).blank?
       true
     else
@@ -99,6 +100,7 @@ class Ticket < ApplicationRecord
   end
 
   def self.calc_anticipo(params)
+    return if params[:parking_zone_id].nil?
     return ParkingZone.find(params[:parking_zone_id]).price if !params[:charge_paid_cents].nil?
     0
   end
