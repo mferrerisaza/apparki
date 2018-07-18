@@ -63,7 +63,9 @@ z1 = ParkingZone.new(
   name: "Zona 1",
   city: "El Retiro",
   user: u1,
-  price: 3000
+  price: 3000,
+  vehicle_type: "car",
+  address: "Cra. 20 #19-35 a 19-9, Retiro, Antioquia"
   )
 z1.save!
 
@@ -73,7 +75,9 @@ z2 = ParkingZone.new(
   name: "Zona 2",
   city: "El Retiro",
   user: u1,
-  price: 3000
+  price: 3000,
+  vehicle_type: "car",
+  address: "Cra. 20 #19-35 a 19-9, Retiro, Antioquia"
   )
 z2.save!
 
@@ -83,7 +87,9 @@ z3 = ParkingZone.new(
   name: "Zona 3",
   city: "El Retiro",
   user: u2,
-  price: 3000
+  price: 3000,
+  vehicle_type: "car",
+  address: "Cra. 20 #19-35 a 19-9, Retiro, Antioquia"
   )
 z3.save!
 
