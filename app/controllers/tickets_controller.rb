@@ -73,14 +73,18 @@ class TicketsController < ApplicationController
   end
 
   def arqueo
-    @user_tickets = Ticket.user_tickets(current_user)
-    authorize @user_tickets
+    @entry_tickets = Ticket.entry_tickets(current_user)
+    @exit_tickets = Ticket.exit_tickets(current_user)
+    @zone_tickets = Ticket.zone_tickets(current_user)
+    authorize @entry_tickets
+    authorize @exit_tickets
+    authorize @zone_tickets
   end
 
   private
 
   def set_parking_zones
-    @parking_zones = ParkingZone.where(user: current_user)
+    @parking_zones = ParkingZone.all # where(user: current_user)
   end
 
   def ticket_params

@@ -7,7 +7,7 @@
             Total recibido en el día
           </div>
           <div class="huge-number flex-space-around">
-            $ <%= subtotal_day(@user_tickets) %>
+            $ <%= subtotal_day(@entry_tickets, @exit_tickets) %>
           </div>
         </div>
       </div>
@@ -19,7 +19,7 @@
             Ingresos registrados
           </div>
           <div class="big-number flex-space-around">
-            <%= count_day_tickets(@user_tickets) %>
+            <%= count_day_tickets(@entry_tickets) %>
           </div>
         </div>
       </div>
@@ -31,7 +31,7 @@
             Vehículos parqueados en tu zona
           </div>
           <div class="big-number flex-space-around">
-            <%= count_parked_vehicles(@user_tickets) %>
+            <%= count_parked_vehicles(@zone_tickets) %>
           </div>
         </div>
       </div>
@@ -43,7 +43,7 @@
             Salidas registradas
           </div>
           <div class="big-number flex-space-around">
-            <%= count_day_closed_tickets(@user_tickets) %>
+            <%= count_day_closed_tickets(@exit_tickets) %>
           </div>
         </div>
       </div>
@@ -55,7 +55,7 @@
             Vehículos reportados
           </div>
           <div class="big-number flex-space-around">
-            <%= count_day_warned_tickets(@user_tickets) %>
+            <%= count_day_warned_tickets(@exit_tickets) %>
           </div>
         </div>
       </div>

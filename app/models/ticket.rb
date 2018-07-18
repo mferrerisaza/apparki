@@ -14,6 +14,7 @@ class Ticket < ApplicationRecord
   validate :vehicle_tickets, on: :create
 
   def vehicle_tickets
+    return if vehicle_id.nil?
     if Ticket.where(status: "pendiente").where(vehicle_id: self.vehicle.id).blank?
       true
     else
@@ -86,11 +87,20 @@ class Ticket < ApplicationRecord
     group_tickets = Ticket.where(entry: beg..endd)
   end
 
-  def self.user_tickets(user)
-    Ticket.joins(:parking_zone).where(parking_zones: {user: user}).where(entry: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+  def self.entry_tickets(user)
+    Ticket.where(entry_user: user).where(entry: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+  end
+
+  def self.exit_tickets(user)
+    Ticket.where(exit_user: user).where(entry: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+  end
+
+  def self.zone_tickets(user)
+    Ticket.joins(:parking_zone).where(parking_zones: {user: user})
   end
 
   def self.calc_anticipo(params)
+    return if params[:parking_zone_id].nil?
     return ParkingZone.find(params[:parking_zone_id]).price if !params[:charge_paid_cents].nil?
     0
   end

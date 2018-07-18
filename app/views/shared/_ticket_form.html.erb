@@ -1,4 +1,20 @@
 <%= simple_form_for(@ticket, remote: true) do |f| %>
+  <div class="col-xs-3">
+    <div class="image-preview-container">
+      <div class="image-preview" style="cursor: pointer; background-image: url('#');" id="img_prev">
+        <label class="file optional" for="ticket_picture">
+          <i class="material-icons">
+            photo_camera
+          </i>
+        </label>
+        <%= f.input :picture, label: false%>
+      </div>
+      <%= f.input :picture_cache, as: :hidden %>
+    </div>
+  </div>
+  <div class="col-xs-9">
+    <h1 class="mdc-typography--headline1">Nuevo Tiquete de Parqueadero</h1>
+  </div>
   <%= f.error_notification %>
   <% if  Time.zone.now  <= Time.zone.now.change(hour: 7) %>
     <%= f.input :entry, as: :hidden, input_html: { value: Time.zone.now.change(hour: 7) }%>
@@ -26,7 +42,8 @@
       <select class="mdc-select__native-control" name="ticket[parking_zone_id]" id="ticket_parking_zone_id">
         <option value="" disabled <%= "selected" if @ticket.parking_zone_id.blank?%>></option>
         <% @parking_zones.each do |zone| %>
-          <option value=<%= zone.id %> <%= "selected" if @ticket.parking_zone_id==zone.id%>> <%= zone.name %></option>
+          <% picked_condition =  @ticket.parking_zone_id==zone.id || current_user==zone.user%>
+          <option value=<%= zone.id %> <%= "selected" if picked_condition%>> <%= zone.name %></option>
         <% end %>
       </select>
       <label class="mdc-floating-label">Seleccione la zona</label>
@@ -53,23 +70,7 @@
           <div class="mdc-checkbox__mixedmark checkbox-color"></div>
         </div>
       </div>
-      <label for="checkbox-1" class="normal-text-weight">Anticipo pagado</label>
-    </div>
-  </div>
-  <div class="col-xs-12 col-margin">
-    <label class="image-preview-label">Foto del vehículo- <small><i>opcional</i></small></label>
-  </div>
-  <div class="col-xs-12 col-margin">
-    <div class="image-preview-container">
-      <div class="image-preview" style="cursor: pointer; background-image: url('#');" id="img_prev">
-        <label class="file optional" for="ticket_picture">
-          <i class="material-icons">
-            photo_camera
-          </i>
-        </label>
-        <%= f.input :picture, label: false%>
-      </div>
-      <%= f.input :picture_cache, as: :hidden %>
+      <label for="checkbox_anticipo" class="normal-text-weight">Anticipo pagado</label>
     </div>
   </div>
   <%= f.input :status, as: :hidden, input_html: { value: "pendiente" }%>

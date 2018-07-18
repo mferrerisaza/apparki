@@ -21,18 +21,6 @@ module ApplicationHelper
     return "#{horas.floor} horas y #{minutos_sobrantes.ceil} minutos facturados"
   end
 
-  def penalty_time(entry, exit)
-    minutos = minutes_closed(entry, exit)
-    horas = hours(minutos)
-    minutos_sobrantes = min_sobr(horas)
-    return "#{minutos} minuto reportado" if minutos == 1
-    return "#{minutos} minutos reportados" if minutos < 60
-    return "#{horas.floor} hora reportada" if horas == 1 && minutos_sobrantes == 0
-    return "#{horas.floor} hora y #{minutos_sobrantes.ceil} minutos reportados" if horas == 1
-    return "#{horas.floor} horas reportadas" if minutos_sobrantes == 0
-    return "#{horas.floor} horas y #{minutos_sobrantes.ceil} minutos reportados"
-  end
-
   def money_paid(entry, exit, price)
     minutos = minutes_closed(entry, exit)
     horas = hours(minutos)
@@ -73,8 +61,8 @@ module ApplicationHelper
     end
   end
 
-  def subtotal_day(tickets)
-    humanize_price((tickets.sum(:charge_cents)/100) + tickets.sum(:charge_paid_cents))
+  def subtotal_day(entry_tickets, exit_tickets)
+    humanize_price((exit_tickets.sum(:charge_cents)/100) + entry_tickets.sum(:charge_paid_cents))
   end
 
   def count_day_tickets(tickets)
