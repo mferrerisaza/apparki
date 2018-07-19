@@ -30,6 +30,10 @@
   padding-left: 24px;
 }
 
+.flex-item-65 {
+  flex: 0 0 65%;
+}
+
 .card-car-right{
   flex: 0 0 25%;
   text-align: right;
@@ -62,4 +66,12 @@
 
 .car-size-big {
   font-size: 32px;
+}
+
+.color-gray {
+  color: #777;
+}
+
+.bottom-space-small {
+  margin-bottom: 4px;
 }
