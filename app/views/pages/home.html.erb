@@ -1,16 +1,59 @@
 <div class="navbar-wagon navbar-wagon-transparent">
   <!-- Logo -->
-  <h1>APPARKI</h1>
-  <div class="navbar-wagon-right hidden-xs hidden-sm">
-    <a href="" class="navbar-wagon-item navbar-wagon-link">Host</a>
-    <a href="" class="navbar-wagon-item navbar-wagon-link">Trips</a>
-    <a href="" class="navbar-wagon-item navbar-wagon-link">Messages</a>
+  <h3>Apparki</h3>
+  <div class="navbar-wagon-right hidden-xs">
+    <%= link_to "Ingresar", new_user_session_path, class: "btn mdc-button mdc-button button-margin navbar-wagon-item navbar-wagon-link"  %>
+    <%= link_to "Solicitar Demo", new_user_session_path, class: "btn mdc-button mdc-button--outlined button-margin navbar-wagon-item navbar-wagon-link"  %>
   </div>
 </div>
 <div class="banner">
   <div class="banner-content">
-    <h1>Apparki</h1>
-    <p>La solución para parqueaderos</p>
-    <%= link_to "Solicitar Demo",new_user_session_path, class:"btn btn-primary btn-lg" %>
+    <h1>El software en la nube para tu parqueadero</h1>
+    <p>Registra, cobra y analiza tu negocio en un mismo lugar</p>
+    <%= link_to "Ingresar",new_user_session_path, class:"btn mdc-button button-margin hidden-sm hidden-md hidden-lg" %>
+    <%= link_to "Solicitar Demo",new_user_session_path, class:"btn mdc-button mdc-button--raised button-margin" %>
+  </div>
+  <%= render 'shared/sumni' %>
+</div>
+<div class="home-page-section">
+  <div class="section-content-div mdc-elevation--z3">
+    <h2>Lorem ipsum dolor sit amet</h2>
+    <div class="section-list-container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-4">
+          <div class="section-content-div-element">
+            <div class="list-element-icon">
+              <i class="fas fa-american-sign-language-interpreting"></i>
+            </div>
+            <h4>Nihil odit autem et!</h4>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae nobis, quasi provident ducimus! Provident nam voluptatibus, impedit temporibus incidunt recusandae fugit dolore eos ipsum perspiciatis asperiores, neque quo omnis! Omnis.
+            </p>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+          <div class="section-content-div-element">
+            <div class="list-element-icon">
+              <i class="fas fa-american-sign-language-interpreting"></i>
+            </div>
+            <h4>Reprehenderit adipisci</h4>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae nobis, quasi provident ducimus! Provident nam voluptatibus, impedit temporibus incidunt recusandae fugit dolore eos ipsum perspiciatis asperiores, neque quo omnis! Omnis.
+            </p>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+          <div class="section-content-div-element">
+            <div class="list-element-icon">
+              <i class="fas fa-american-sign-language-interpreting"></i>
+            </div>
+            <h4>Libero quos amet</h4>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae nobis, quasi provident ducimus! Provident nam voluptatibus, impedit temporibus incidunt recusandae fugit dolore eos ipsum perspiciatis asperiores, neque quo omnis! Omnis.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
