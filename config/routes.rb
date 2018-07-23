@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'pages#dashboard', as: 'dashboard'
   get 'arqueo', to: 'tickets#arqueo', as: 'arqueo'
   get 'landing', to: 'parking_zones#landing', as: 'landing'
+  get '/solicitar-demo', to: 'pages#demo', as: 'demo'
 
   # Sidekiq Web UI, only for admins.
   require 'sidekiq/web'

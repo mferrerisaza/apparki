@@ -3,7 +3,7 @@
   <h3>Apparki</h3>
   <div class="navbar-wagon-right hidden-xs">
     <%= link_to "Ingresar", new_user_session_path, class: "btn mdc-button mdc-button button-margin navbar-wagon-item navbar-wagon-link"  %>
-    <%= link_to "Solicitar Demo", new_user_session_path, class: "btn mdc-button mdc-button--outlined button-margin navbar-wagon-item navbar-wagon-link"  %>
+    <%= link_to "Solicitar Demo", demo_path, class: "btn mdc-button mdc-button--outlined button-margin navbar-wagon-item navbar-wagon-link"  %>
   </div>
 </div>
 <div class="banner">
@@ -11,7 +11,7 @@
     <h1>El software en la nube para tu parqueadero</h1>
     <p>Registra, cobra y analiza tu negocio en un mismo lugar</p>
     <%= link_to "Ingresar",new_user_session_path, class:"btn mdc-button button-margin hidden-sm hidden-md hidden-lg" %>
-    <%= link_to "Solicitar Demo",new_user_session_path, class:"btn mdc-button mdc-button--raised button-margin" %>
+    <%= link_to "Solicitar Demo", demo_path, class:"btn mdc-button mdc-button--raised button-margin" %>
   </div>
   <%= render 'shared/sumni' %>
 </div>
