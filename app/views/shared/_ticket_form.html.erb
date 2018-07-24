@@ -15,7 +15,9 @@
   <div class="col-xs-9">
     <h1 class="mdc-typography--headline1">Nuevo Tiquete de Parqueadero</h1>
   </div>
-  <%= f.error_notification %>
+  <div class="col-xs-12">
+    <%= f.error_notification %>
+  </div>
   <% if  Time.zone.now  <= Time.zone.now.change(hour: 7) %>
     <%= f.input :entry, as: :hidden, input_html: { value: Time.zone.now.change(hour: 7) }%>
   <% else %>
