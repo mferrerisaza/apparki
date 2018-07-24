@@ -32,7 +32,7 @@ config.webpacker.check_yarn_integrity = false
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = true
+  config.assets.compile = false
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
@@ -52,7 +52,7 @@ config.webpacker.check_yarn_integrity = false
   config.force_ssl = true
 
   # Use the lowest log level to ensure availability of diagnostic information
-  # when problems arise.
+  # when probhttp://apparki.herokuapp.com lems arise.
   config.log_level = :debug
 
   # Prepend all log lines with the following tags.
