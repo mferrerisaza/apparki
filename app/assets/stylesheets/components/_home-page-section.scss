@@ -39,12 +39,14 @@
           font-size: 24px;
           line-height: 30px;
           color: white;
+          text-align: center;
         }
         p {
           margin-top: 16px;
           color: rgba(255, 255, 255, 0.8);
           font-size: 16px;
           line-height: 24px;
+          text-align: justify;
         }
       }
     }
@@ -63,5 +65,11 @@
         color: rgba(0,157,229,1);
       }
     }
+  }
+}
+@media (max-width:844px) {
+  .home-page-section {
+    position: relative;
+    bottom: 120px;
   }
 }
