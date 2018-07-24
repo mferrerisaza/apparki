@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       root 'tickets#index', as: :authenticated_root
     end
     unauthenticated do
-      root 'devise/sessions#new', as: :unauthenticated_root
+      root 'pages#home', as: :unauthenticated_root
     end
   end
   resources :vehicles, only: [:index, :show, :update]
@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'pages#dashboard', as: 'dashboard'
   get 'arqueo', to: 'tickets#arqueo', as: 'arqueo'
   get 'landing', to: 'parking_zones#landing', as: 'landing'
+  get '/solicitar-demo', to: 'pages#demo', as: 'demo'
 
   # Sidekiq Web UI, only for admins.
   require 'sidekiq/web'

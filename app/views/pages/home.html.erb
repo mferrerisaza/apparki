@@ -1,0 +1,59 @@
+<div class="navbar-wagon navbar-wagon-transparent">
+  <!-- Logo -->
+  <h3>Apparki</h3>
+  <div class="navbar-wagon-right hidden-xs">
+    <%= link_to "Ingresar", new_user_session_path, class: "btn mdc-button mdc-button button-margin navbar-wagon-item navbar-wagon-link"  %>
+    <%= link_to "Solicitar Demo", demo_path, class: "btn mdc-button mdc-button--outlined button-margin navbar-wagon-item navbar-wagon-link"  %>
+  </div>
+</div>
+<div class="banner">
+  <div class="banner-content">
+    <h1>Administra tu parqueadero en la nube y desde tu celular</h1>
+    <p>Registra, cobra y analiza tu negocio en un mismo lugar</p>
+    <%= link_to "Ingresar",new_user_session_path, class:"btn mdc-button button-margin hidden-sm hidden-md hidden-lg" %>
+    <%= link_to "Solicitar Demo", demo_path, class:"btn mdc-button mdc-button--raised button-margin" %>
+  </div>
+  <%= render 'shared/sumni' %>
+</div>
+<div class="home-page-section">
+  <div class="section-content-div mdc-elevation--z3">
+    <h2>Gestionar tu parqueadero nunca fue tan sencillo</h2>
+    <div class="section-list-container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-4">
+          <div class="section-content-div-element">
+            <div class="list-element-icon">
+              <i class="fas fa-money-bill"></i>
+            </div>
+            <h4>Simplifica las transacciones</h4>
+            <p>
+              Registra los vehiculos de forma rápida y sencilla, revisa el estado de caja en cualquier momento y no te preocupes más por calcular la tarifa, la app lo hará por ti.
+            </p>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+          <div class="section-content-div-element">
+            <div class="list-element-icon">
+              <i class="fas fa-parking"></i>
+            </div>
+            <h4>Disponibilidad de parqueaderos</h4>
+            <p>
+              Los usuarios de tu parqueadero podrán ver las celdas disponibles, incluso antes de salir de su lugar de partida.
+            </p>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+          <div class="section-content-div-element">
+            <div class="list-element-icon">
+              <i class="fas fa-chart-bar"></i>
+            </div>
+            <h4>Reportes en tiempo real</h4>
+            <p>
+              Accede en cualquier momento a la información transaccional de tu negocio, compara ingresos semanales y mensuales, encuentra la tasa de ocupación de tu parqueadero y más.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
