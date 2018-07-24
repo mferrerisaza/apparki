@@ -1,0 +1,5 @@
+meta_product_name: "Apparki"
+meta_title: "Apparki | Administra tu parqueadero"
+meta_description: "Registra, cobra y analiza tu parqueadero en un mismo lugar"
+meta_image: "parking_landing.jpg"                       # El logo va aquí should exist in `app/assets/images/`
+# twitter_account: "@product_twitter_account"   # required for Twitter Cards
