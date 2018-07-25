@@ -42,7 +42,7 @@
         <h4>Apparki</h4>
       <% end %>
     </div>
-    <% if controller_name == "tickets" && (action_name == "show" || action_name == "new") || action_name == "arqueo" || controller_name %>
+    <% unless controller_name == "tickets" && action_name == "index" %>
       <div class="navbar-wagon-item item-hidden">
     <% else %>
       <div class="navbar-wagon-item">
