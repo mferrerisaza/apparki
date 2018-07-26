@@ -47,10 +47,16 @@
     <% else %>
       <div class="navbar-wagon-item">
     <% end %>
-      <i class="material-icons navbar-wagon-icon" data-toggle="modal" data-target="#myModal">
-        search
-      </i>
-    </div>
+        <i class="material-icons navbar-wagon-icon <%= "item-hidden" if @filtered %>" data-toggle="modal" data-target="#myModal">
+          search
+        </i>
+        <% hide = @filtered ? "" : "hidden" %>
+        <%= link_to tickets_path, class: "navbar-wagon-item #{hide}" do%>
+          <i class="material-icons navbar-wagon-icon">
+            close
+          </i>
+        <% end %>
+      </div>
   </div>
   <%= render 'shared/search-plate-modal' %>
 <% end %>
