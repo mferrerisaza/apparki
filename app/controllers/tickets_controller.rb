@@ -4,7 +4,10 @@ class TicketsController < ApplicationController
 
   def index
     @tickets = Ticket.where(nil)
-    @tickets = @tickets.search_by_plate(params[:plate]) if params[:plate].present?
+    if params[:plate].present?
+      @tickets = @tickets.search_by_plate(params[:plate])
+      @filtered = true
+    end
     @open_tickets = policy_scope(@tickets).where(status: "pendiente").order(entry: :asc)
     beginning_of_day = Time.zone.now.beginning_of_day
     end_of_day = Time.zone.now.end_of_day
