@@ -219,7 +219,23 @@
 </div>
 
 <div class="<%= "hidden" unless @ticket.status == "pagado" %> ">
-  <% string = "" %> <!-- TODO: Poner acá el link del recibo probando con la maquina -->
+  <% entry = "#{@ticket.entry.strftime("%x")}-#{@ticket.entry.strftime("%R")}"%>
+  <% if @ticket.status == "pagado" %>
+    <% exit = "#{@ticket.exit.strftime("%x")}-#{@ticket.exit.strftime("%R")}"%>
+  <% else %>
+    <% exit = "" %>
+  <% end %>
+  <% hours = @ticket.charge/@ticket.parking_zone.price %>
+  <% price = humanize_price @ticket.parking_zone.price %>
+  <% charge = humanize_price @ticket.charge %>
+  <% debt = humanize_price @ticket.vehicle.debt %>
+  <% total = humanize_price debt.to_money + @ticket.charge %>
+  <% charge_paid_cents = humanize_price @ticket.charge_paid_cents %>
+  <% if debt.to_money.zero? %>
+    <% string = "com.fidelier.printfromweb://$intro$$intro$$big$RECIBO PARQUEADERO$intro$$intro$->Id del Tiquete: #{@ticket.id}$intro$->Placa Del Vehiculo: #{@ticket.vehicle.plate}$intro$->Hora ingreso: #{entry}$intro$->Hora salida: #{exit}$intro$->Zona: #{@ticket.parking_zone.name}$intro$->Pago Anticipado: #{charge_paid_cents}$intro$->Horas facturadas: #{hours} x #{price} $intro$$intro$------>TOTAL COBRO: #{charge}$intro$$intro$$intro$$intro$$cut$$intro$" %>
+  <% else %>
+    <%string = "com.fidelier.printfromweb://$intro$$intro$$big$RECIBO PARQUEADERO$intro$$intro$->Id del Tiquete: #{@ticket.id}$intro$->Placa Del Vehiculo: #{@ticket.vehicle.plate}$intro$->Hora ingreso: #{entry}$intro$->Hora salida: #{exit}$intro$->Zona: #{@ticket.parking_zone.name}$intro$->Pago Anticipado: #{charge_paid_cents}$intro$->Horas facturadas: #{hours} x #{price} $intro$->Deuda: #{debt} $intro$$intro$------>TOTAL COBRO: #{total}$intro$$intro$$intro$$intro$$cut$$intro$" %>
+  <% end %>
   <a class="mdc-fab material-icons fab-bottom-right fab-color" style="cursor:pointer;" href="<%= string %>">
     <i class="material-icons">
       print
