@@ -1,0 +1,50 @@
+service: apparki
+image: ghcr.io/mferrerisaza/apparki
+
+servers:
+  web:
+    hosts:
+      - 100.72.242.58
+    proxy: false
+    options:
+      publish:
+        - "3006:3000"
+
+registry:
+  server: ghcr.io
+  username: mferrerisaza
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+env:
+  clear:
+    RAILS_ENV: production
+    RAILS_SERVE_STATIC_FILES: true
+    RAILS_ASSUME_SSL: true
+    PORT: 3000
+  secret:
+    - DATABASE_URL
+    - CLOUDINARY_URL
+    - SECRET_KEY_BASE
+
+volumes:
+  - "apparki_storage:/rails/storage"
+
+asset_path: /rails/public/assets
+
+ssh:
+  user: admin
+
+builder:
+  arch: amd64
+
+# Aliases for common commands
+aliases:
+  console: app exec --interactive --reuse "bin/rails console"
+  logs: app logs -f
+  seed: app exec --reuse "bin/rails db:seed"
+  migrate: app exec --reuse "bin/rails db:migrate"
+  status: app exec --reuse "bin/rails db:migrate:status"
+  restart: app restart
+  stop: app stop
+  start: app start
