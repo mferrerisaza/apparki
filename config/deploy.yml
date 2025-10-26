@@ -4,7 +4,7 @@ image: ghcr.io/mferrerisaza/apparki
 servers:
   web:
     hosts:
-      - 100.72.242.58
+      - 100.67.32.91
     proxy: false
     options:
       publish:
